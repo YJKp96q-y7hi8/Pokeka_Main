@@ -1044,5 +1044,63 @@ namespace Pokeka
         {
 
         }
+
+        public List<string> searchCardList = new List<string>();
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            searchCardList.Clear();
+            string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
+
+            foreach (string pathes in filesFullPath)
+            {
+                if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                {
+                    if (pathes.Contains(tbx_Search.Text))
+                    {
+                        if ((pathes.Contains(cbx_SearchCatego.Text)))
+                        {
+                            if ((pathes.Contains(cbx_SearchCatego2.Text)))
+                            {
+                                searchCardList.Add(pathes);
+                            }
+                        }
+                    }
+                }
+                else if (cbx_SearchCatego.Text != "すべて")
+                {
+                    if (pathes.Contains(tbx_Search.Text))
+                    {
+                        if ((pathes.Contains(cbx_SearchCatego.Text)))
+                        {
+                            searchCardList.Add(pathes);
+                        }
+                    }
+                }
+                else if (pathes.Contains(tbx_Search.Text))
+                {
+                    searchCardList.Add(pathes);
+                }
+            
+            }
+
+            SearchForm sf = new SearchForm();
+            sf.Show();
+        }
+
+        private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbx_SearchCatego.SelectedIndex == 0)
+            {
+                cbx_SearchCatego2.SelectedIndex = 0;
+                return;
+            }
+
+            if (cbx_SearchCatego.Text == "ポケモン")
+            {
+                cbx_SearchCatego2.Text = "すべて";
+                cbx_SearchCatego2.Items.AddRange(new object[] 
+                {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "鋼", "悪", "龍", "妖"});
+            }
+        }
     }
 }

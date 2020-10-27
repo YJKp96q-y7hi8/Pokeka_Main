@@ -40,6 +40,10 @@
             this.btn_Rec_Set = new System.Windows.Forms.Button();
             this.btn_Rec_Save = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.gbx_Search = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbx_Search = new System.Windows.Forms.TextBox();
+            this.btn_Search = new System.Windows.Forms.Button();
             this.uc_Card1 = new Pokeka.uc_Card();
             this.uc_Card30 = new Pokeka.uc_Card();
             this.uc_Card2 = new Pokeka.uc_Card();
@@ -70,10 +74,8 @@
             this.uc_Card22 = new Pokeka.uc_Card();
             this.uc_Card16 = new Pokeka.uc_Card();
             this.uc_Card21 = new Pokeka.uc_Card();
-            this.gbx_Search = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbx_Search = new System.Windows.Forms.TextBox();
-            this.btn_Search = new System.Windows.Forms.Button();
+            this.cbx_SearchCatego = new System.Windows.Forms.ComboBox();
+            this.cbx_SearchCatego2 = new System.Windows.Forms.ComboBox();
             this.gbx_Info.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbx_Rec.SuspendLayout();
@@ -272,6 +274,55 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.80952F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1903, 1200);
             this.tableLayoutPanel3.TabIndex = 33;
+            // 
+            // gbx_Search
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.gbx_Search, 3);
+            this.gbx_Search.Controls.Add(this.tableLayoutPanel4);
+            this.gbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbx_Search.Location = new System.Drawing.Point(1333, 3);
+            this.gbx_Search.Name = "gbx_Search";
+            this.gbx_Search.Size = new System.Drawing.Size(567, 51);
+            this.gbx_Search.TabIndex = 33;
+            this.gbx_Search.TabStop = false;
+            this.gbx_Search.Text = "検索";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel4.Controls.Add(this.tbx_Search, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btn_Search, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego2, 2, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(561, 30);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // tbx_Search
+            // 
+            this.tbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbx_Search.Location = new System.Drawing.Point(3, 3);
+            this.tbx_Search.Name = "tbx_Search";
+            this.tbx_Search.Size = new System.Drawing.Size(246, 22);
+            this.tbx_Search.TabIndex = 0;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(479, 3);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(79, 24);
+            this.btn_Search.TabIndex = 1;
+            this.btn_Search.Text = "検索";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // uc_Card1
             // 
@@ -573,50 +624,30 @@
             this.uc_Card21.Size = new System.Drawing.Size(186, 281);
             this.uc_Card21.TabIndex = 21;
             // 
-            // gbx_Search
+            // cbx_SearchCatego
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.gbx_Search, 3);
-            this.gbx_Search.Controls.Add(this.tableLayoutPanel4);
-            this.gbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbx_Search.Location = new System.Drawing.Point(1333, 3);
-            this.gbx_Search.Name = "gbx_Search";
-            this.gbx_Search.Size = new System.Drawing.Size(567, 51);
-            this.gbx_Search.TabIndex = 33;
-            this.gbx_Search.TabStop = false;
-            this.gbx_Search.Text = "検索";
+            this.cbx_SearchCatego.FormattingEnabled = true;
+            this.cbx_SearchCatego.Items.AddRange(new object[] {
+            "すべて",
+            "ポケモン",
+            "グッズ",
+            "サポート",
+            "スタジアム",
+            "エネルギー"});
+            this.cbx_SearchCatego.Location = new System.Drawing.Point(255, 3);
+            this.cbx_SearchCatego.Name = "cbx_SearchCatego";
+            this.cbx_SearchCatego.Size = new System.Drawing.Size(106, 23);
+            this.cbx_SearchCatego.TabIndex = 2;
+            this.cbx_SearchCatego.Text = "すべて";
+            this.cbx_SearchCatego.SelectedIndexChanged += new System.EventHandler(this.cbx_SearchCatego_SelectedIndexChanged);
             // 
-            // tableLayoutPanel4
+            // cbx_SearchCatego2
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.82823F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.17177F));
-            this.tableLayoutPanel4.Controls.Add(this.tbx_Search, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btn_Search, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 18);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(561, 30);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // tbx_Search
-            // 
-            this.tbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbx_Search.Location = new System.Drawing.Point(3, 3);
-            this.tbx_Search.Name = "tbx_Search";
-            this.tbx_Search.Size = new System.Drawing.Size(436, 22);
-            this.tbx_Search.TabIndex = 0;
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Search.Location = new System.Drawing.Point(445, 3);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(113, 24);
-            this.btn_Search.TabIndex = 1;
-            this.btn_Search.Text = "検索";
-            this.btn_Search.UseVisualStyleBackColor = true;
+            this.cbx_SearchCatego2.FormattingEnabled = true;
+            this.cbx_SearchCatego2.Location = new System.Drawing.Point(367, 3);
+            this.cbx_SearchCatego2.Name = "cbx_SearchCatego2";
+            this.cbx_SearchCatego2.Size = new System.Drawing.Size(106, 23);
+            this.cbx_SearchCatego2.TabIndex = 3;
             // 
             // FormMain
             // 
@@ -688,6 +719,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox tbx_Search;
         private System.Windows.Forms.Button btn_Search;
+        private System.Windows.Forms.ComboBox cbx_SearchCatego;
+        private System.Windows.Forms.ComboBox cbx_SearchCatego2;
     }
 }
 
