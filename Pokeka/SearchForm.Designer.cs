@@ -60,6 +60,7 @@
             this.pbx_30 = new System.Windows.Forms.PictureBox();
             this.btn_Next = new System.Windows.Forms.Button();
             this.btn_Back = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_03)).BeginInit();
@@ -100,6 +101,7 @@
             this.pbx_01.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_01.TabIndex = 0;
             this.pbx_01.TabStop = false;
+            this.pbx_01.Click += new System.EventHandler(this.pbx_01_Click);
             // 
             // pbx_02
             // 
@@ -109,6 +111,7 @@
             this.pbx_02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_02.TabIndex = 1;
             this.pbx_02.TabStop = false;
+            this.pbx_02.Click += new System.EventHandler(this.pbx_02_Click);
             // 
             // pbx_03
             // 
@@ -118,6 +121,7 @@
             this.pbx_03.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_03.TabIndex = 2;
             this.pbx_03.TabStop = false;
+            this.pbx_03.Click += new System.EventHandler(this.pbx_03_Click);
             // 
             // pbx_04
             // 
@@ -127,6 +131,7 @@
             this.pbx_04.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_04.TabIndex = 3;
             this.pbx_04.TabStop = false;
+            this.pbx_04.Click += new System.EventHandler(this.pbx_04_Click);
             // 
             // pbx_05
             // 
@@ -136,6 +141,7 @@
             this.pbx_05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_05.TabIndex = 4;
             this.pbx_05.TabStop = false;
+            this.pbx_05.Click += new System.EventHandler(this.pbx_05_Click);
             // 
             // pbx_06
             // 
@@ -145,6 +151,7 @@
             this.pbx_06.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_06.TabIndex = 5;
             this.pbx_06.TabStop = false;
+            this.pbx_06.Click += new System.EventHandler(this.pbx_06_Click);
             // 
             // pbx_07
             // 
@@ -154,6 +161,7 @@
             this.pbx_07.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_07.TabIndex = 6;
             this.pbx_07.TabStop = false;
+            this.pbx_07.Click += new System.EventHandler(this.pbx_07_Click);
             // 
             // pbx_08
             // 
@@ -163,6 +171,7 @@
             this.pbx_08.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_08.TabIndex = 7;
             this.pbx_08.TabStop = false;
+            this.pbx_08.Click += new System.EventHandler(this.pbx_08_Click);
             // 
             // pbx_09
             // 
@@ -172,6 +181,7 @@
             this.pbx_09.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_09.TabIndex = 8;
             this.pbx_09.TabStop = false;
+            this.pbx_09.Click += new System.EventHandler(this.pbx_09_Click);
             // 
             // pbx_10
             // 
@@ -181,6 +191,7 @@
             this.pbx_10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_10.TabIndex = 9;
             this.pbx_10.TabStop = false;
+            this.pbx_10.Click += new System.EventHandler(this.pbx_10_Click);
             // 
             // pbx_11
             // 
@@ -190,6 +201,7 @@
             this.pbx_11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_11.TabIndex = 10;
             this.pbx_11.TabStop = false;
+            this.pbx_11.Click += new System.EventHandler(this.pbx_11_Click);
             // 
             // pbx_12
             // 
@@ -199,6 +211,7 @@
             this.pbx_12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_12.TabIndex = 11;
             this.pbx_12.TabStop = false;
+            this.pbx_12.Click += new System.EventHandler(this.pbx_12_Click);
             // 
             // pbx_13
             // 
@@ -208,6 +221,7 @@
             this.pbx_13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_13.TabIndex = 12;
             this.pbx_13.TabStop = false;
+            this.pbx_13.Click += new System.EventHandler(this.pbx_13_Click);
             // 
             // pbx_14
             // 
@@ -217,6 +231,7 @@
             this.pbx_14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_14.TabIndex = 13;
             this.pbx_14.TabStop = false;
+            this.pbx_14.Click += new System.EventHandler(this.pbx_14_Click);
             // 
             // pbx_15
             // 
@@ -226,6 +241,7 @@
             this.pbx_15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_15.TabIndex = 14;
             this.pbx_15.TabStop = false;
+            this.pbx_15.Click += new System.EventHandler(this.pbx_15_Click);
             // 
             // pbx_16
             // 
@@ -235,6 +251,7 @@
             this.pbx_16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_16.TabIndex = 15;
             this.pbx_16.TabStop = false;
+            this.pbx_16.Click += new System.EventHandler(this.pbx_16_Click);
             // 
             // pbx_17
             // 
@@ -244,6 +261,7 @@
             this.pbx_17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_17.TabIndex = 16;
             this.pbx_17.TabStop = false;
+            this.pbx_17.Click += new System.EventHandler(this.pbx_17_Click);
             // 
             // pbx_18
             // 
@@ -253,6 +271,7 @@
             this.pbx_18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_18.TabIndex = 17;
             this.pbx_18.TabStop = false;
+            this.pbx_18.Click += new System.EventHandler(this.pbx_18_Click);
             // 
             // pbx_19
             // 
@@ -262,6 +281,7 @@
             this.pbx_19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_19.TabIndex = 18;
             this.pbx_19.TabStop = false;
+            this.pbx_19.Click += new System.EventHandler(this.pbx_19_Click);
             // 
             // pbx_20
             // 
@@ -271,6 +291,7 @@
             this.pbx_20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_20.TabIndex = 19;
             this.pbx_20.TabStop = false;
+            this.pbx_20.Click += new System.EventHandler(this.pbx_20_Click);
             // 
             // pbx_21
             // 
@@ -280,6 +301,7 @@
             this.pbx_21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_21.TabIndex = 20;
             this.pbx_21.TabStop = false;
+            this.pbx_21.Click += new System.EventHandler(this.pbx_21_Click);
             // 
             // pbx_22
             // 
@@ -289,6 +311,7 @@
             this.pbx_22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_22.TabIndex = 21;
             this.pbx_22.TabStop = false;
+            this.pbx_22.Click += new System.EventHandler(this.pbx_22_Click);
             // 
             // pbx_23
             // 
@@ -298,6 +321,7 @@
             this.pbx_23.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_23.TabIndex = 22;
             this.pbx_23.TabStop = false;
+            this.pbx_23.Click += new System.EventHandler(this.pbx_23_Click);
             // 
             // pbx_24
             // 
@@ -307,6 +331,7 @@
             this.pbx_24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_24.TabIndex = 23;
             this.pbx_24.TabStop = false;
+            this.pbx_24.Click += new System.EventHandler(this.pbx_24_Click);
             // 
             // pbx_25
             // 
@@ -316,6 +341,7 @@
             this.pbx_25.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_25.TabIndex = 24;
             this.pbx_25.TabStop = false;
+            this.pbx_25.Click += new System.EventHandler(this.pbx_25_Click);
             // 
             // pbx_26
             // 
@@ -325,6 +351,7 @@
             this.pbx_26.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_26.TabIndex = 25;
             this.pbx_26.TabStop = false;
+            this.pbx_26.Click += new System.EventHandler(this.pbx_26_Click);
             // 
             // pbx_27
             // 
@@ -334,6 +361,7 @@
             this.pbx_27.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_27.TabIndex = 26;
             this.pbx_27.TabStop = false;
+            this.pbx_27.Click += new System.EventHandler(this.pbx_27_Click);
             // 
             // pbx_28
             // 
@@ -343,6 +371,7 @@
             this.pbx_28.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_28.TabIndex = 27;
             this.pbx_28.TabStop = false;
+            this.pbx_28.Click += new System.EventHandler(this.pbx_28_Click);
             // 
             // pbx_29
             // 
@@ -352,6 +381,7 @@
             this.pbx_29.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_29.TabIndex = 28;
             this.pbx_29.TabStop = false;
+            this.pbx_29.Click += new System.EventHandler(this.pbx_29_Click);
             // 
             // pbx_30
             // 
@@ -361,6 +391,7 @@
             this.pbx_30.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_30.TabIndex = 29;
             this.pbx_30.TabStop = false;
+            this.pbx_30.Click += new System.EventHandler(this.pbx_30_Click);
             // 
             // btn_Next
             // 
@@ -382,11 +413,22 @@
             this.btn_Back.UseVisualStyleBackColor = true;
             this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
             // 
+            // btn_Close
+            // 
+            this.btn_Close.Location = new System.Drawing.Point(212, 728);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(92, 36);
+            this.btn_Close.TabIndex = 32;
+            this.btn_Close.Text = "閉じる";
+            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 776);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.pbx_30);
@@ -419,7 +461,9 @@
             this.Controls.Add(this.pbx_03);
             this.Controls.Add(this.pbx_02);
             this.Controls.Add(this.pbx_01);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SearchForm";
             this.Load += new System.EventHandler(this.SearchForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_01)).EndInit();
@@ -490,5 +534,6 @@
         private System.Windows.Forms.PictureBox pbx_30;
         private System.Windows.Forms.Button btn_Next;
         private System.Windows.Forms.Button btn_Back;
+        private System.Windows.Forms.Button btn_Close;
     }
 }

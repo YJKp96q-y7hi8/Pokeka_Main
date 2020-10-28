@@ -17,32 +17,37 @@ namespace Pokeka
             ENERGY,
         }
 
-        public string name = ""; //カード名
-        public string category = ""; //カテゴリー
-        public string pictPass = ""; //画像パス
-        public int num = 0;  //枚数
+        //public string name = ""; //カード名
+        //public string category = ""; //カテゴリー
+        //public string pictPass = ""; //画像パス
+        //public int num = 0;  //枚数
 
-        private string[] cstegoArray = { "ポケモン", "グッズ", "サポート", "スタジアム", "エネルギー" };
+        public string Name { set; get; } //カード名
+        public string Category { set; get; } //カテゴリー
+        public string PictPass { set; get; } //画像パス
+        public int Num { set; get; }  //枚数
 
         public void SetCardInfo(string fileName, string pass)
         {
-            name = fileName.Replace(".jpg", "");
-            pictPass = pass;
-            num = 1;
+            Name = fileName.Replace(".jpg", "");
+            PictPass = pass;
+            Num = 1;
 
-            if (pass.Replace(fileName, "").Contains("ポケモン")) { category = cstegoArray[(int)CATEGORY.POKEMON]; }
-            if (pass.Replace(fileName, "").Contains("グッズ")) { category = cstegoArray[(int)CATEGORY.GOODS]; }
-            if (pass.Replace(fileName, "").Contains("サポート")) { category = cstegoArray[(int)CATEGORY.SUPPORT]; }
-            if (pass.Replace(fileName, "").Contains("スタジアム")) { category = cstegoArray[(int)CATEGORY.STUDIUM]; }
-            if (pass.Replace(fileName, "").Contains("エネルギー")) { category = cstegoArray[(int)CATEGORY.ENERGY]; }
+            string[] cstegoArray = { "ポケモン", "グッズ", "サポート", "スタジアム", "エネルギー" };
+
+            if (pass.Replace(fileName, "").Contains("ポケモン")) { Category = cstegoArray[(int)CATEGORY.POKEMON]; }
+            if (pass.Replace(fileName, "").Contains("グッズ")) { Category = cstegoArray[(int)CATEGORY.GOODS]; }
+            if (pass.Replace(fileName, "").Contains("サポート")) { Category = cstegoArray[(int)CATEGORY.SUPPORT]; }
+            if (pass.Replace(fileName, "").Contains("スタジアム")) { Category = cstegoArray[(int)CATEGORY.STUDIUM]; }
+            if (pass.Replace(fileName, "").Contains("エネルギー")) { Category = cstegoArray[(int)CATEGORY.ENERGY]; }
         }
 
         public void DeleteCardInfo()
         {
-            name = "";
-            category = "";
-            pictPass = "";
-            num = 0;
+            Name = "";
+            Category = "";
+            PictPass = "";
+            Num = 0;
         }
     }
 }

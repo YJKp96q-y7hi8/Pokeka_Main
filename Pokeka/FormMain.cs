@@ -15,7 +15,8 @@ namespace Pokeka
     {
         OpenFileDialog ofd = new OpenFileDialog();
         OpenFileDialog ofdDeck = new OpenFileDialog();
-        internal CardInfo[] card = new CardInfo[31];    //各CardInfoのインスタンス
+        internal CardInfo[] _cardInfo = new CardInfo[31];    //CardInfoのインスタンス
+        internal uc_Card[] _ucCard = new uc_Card[31];    //ユーザーコントロールのインスタンス
         internal int cardNum = 0;
 
         public FormMain()
@@ -24,6 +25,7 @@ namespace Pokeka
             FormMain.Form1Instance = this;
             ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"Card List");
             ofdDeck.InitialDirectory = Path.Combine(Application.StartupPath, @"Deck List");
+            UcCardSet();
             EventSet();
         }
 
@@ -41,7 +43,7 @@ namespace Pokeka
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 cardInfo.SetCardInfo(ofd.SafeFileName, ofd.FileName);
-                SetCardInfo(ucCard, cardInfo, cardInfo.num);
+                SetCardInfo(ucCard, cardInfo, cardInfo.Num);
             }
             else
             {
@@ -63,13 +65,14 @@ namespace Pokeka
             ucCard.nud_Num.Value = 1;
             ucCard.nud_Num.Enabled = false;
             ucCard.BackColor = System.Drawing.SystemColors.Control;
-            int arrayNum = Array.IndexOf(card, cardInfo);
-            card[arrayNum] = null;
+            int arrayNum = Array.IndexOf(_cardInfo, cardInfo);
+            _cardInfo[arrayNum] = null;
+            Nud_ValueChanged(cardInfo, ucCard);
         }
 
         private void Pbx_Pict_Click(int num)
         {
-            if(card[num] == null)
+            if(_cardInfo[num] == null)
             {
                 return;
             }
@@ -78,24 +81,24 @@ namespace Pokeka
             showPict.ShowDialog();
         }
 
-        private void Nud_ValueChanged(CardInfo cardInfo, uc_Card ucCard)
+        internal void Nud_ValueChanged(CardInfo cardInfo, uc_Card ucCard)
         {
-            cardInfo.num = (int)ucCard.nud_Num.Value;
+            cardInfo.Num = (int)ucCard.nud_Num.Value;
             int allNum = 0;
-            for(int i=0; i<card.Length; i++)
+            for(int i=0; i< _cardInfo.Length; i++)
             {
-                if(card[i] != null)
+                if(_cardInfo[i] != null)
                 {
-                    allNum += card[i].num;
+                    allNum += _cardInfo[i].Num;
                 }
             }
             tbx_Info_Num.Text = allNum.ToString();
         }
 
-        private void SetCardInfo(uc_Card ucCard, CardInfo cardInfo, int nums)
+        internal void SetCardInfo(uc_Card ucCard, CardInfo cardInfo, int nums)
         {
-            ucCard.pbx_Pict.ImageLocation = cardInfo.pictPass;
-            ucCard.gbx_Card.Text = cardInfo.category;
+            ucCard.pbx_Pict.ImageLocation = cardInfo.PictPass;
+            ucCard.gbx_Card.Text = cardInfo.Category;
             if(ucCard.gbx_Card.Text == "ポケモン")
             { ucCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192))))); }
             if (ucCard.gbx_Card.Text == "グッズ")
@@ -111,7 +114,6 @@ namespace Pokeka
             ucCard.nud_Num.Value = nums;
         }
 
-        int num = 1;
         private void btn_Rec_Set_Click(object sender, EventArgs e)
         {
             if (ofdDeck.ShowDialog() == DialogResult.OK)
@@ -122,158 +124,37 @@ namespace Pokeka
                     while (sr.EndOfStream == false)
                     {
                         string[] read = sr.ReadLine().Split(',');
-                        card[num] = new CardInfo();
-                        card[num].SetCardInfo(read[0] + ".jpg", read[2]);
-                        card[num].num = int.Parse(read[3]);
-                        switch (num)
+                        _cardInfo[srNum] = new CardInfo();
+                        _cardInfo[srNum].SetCardInfo(read[0] + ".jpg", read[2]);
+                        _cardInfo[srNum].Num = int.Parse(read[3]);
+
+                        if (_cardInfo[srNum] != null)
                         {
-                            case 1:
-                                SetCardInfo(uc_Card1, card[num], card[num].num);
-                                break;
-                            case 2:
-                                SetCardInfo(uc_Card2, card[num], card[num].num);
-                                break;
-                            case 3:
-                                SetCardInfo(uc_Card3, card[num], card[num].num);
-                                break;
-                            case 4:
-                                SetCardInfo(uc_Card4, card[num], card[num].num);
-                                break;
-                            case 5:
-                                SetCardInfo(uc_Card5, card[num], card[num].num);
-                                break;
-                            case 6:
-                                SetCardInfo(uc_Card6, card[num], card[num].num);
-                                break;
-                            case 7:
-                                SetCardInfo(uc_Card7, card[num], card[num].num);
-                                break;
-                            case 8:
-                                SetCardInfo(uc_Card8, card[num], card[num].num);
-                                break;
-                            case 9:
-                                SetCardInfo(uc_Card9, card[num], card[num].num);
-                                break;
-                            case 10:
-                                SetCardInfo(uc_Card10, card[num], card[num].num);
-                                break;
-                            case 11:
-                                SetCardInfo(uc_Card11, card[num], card[num].num);
-                                break;
-                            case 12:
-                                SetCardInfo(uc_Card12, card[num], card[num].num);
-                                break;
-                            case 13:
-                                SetCardInfo(uc_Card13, card[num], card[num].num);
-                                break;
-                            case 14:
-                                SetCardInfo(uc_Card14, card[num], card[num].num);
-                                break;
-                            case 15:
-                                SetCardInfo(uc_Card15, card[num], card[num].num);
-                                break;
-                            case 16:
-                                SetCardInfo(uc_Card16, card[num], card[num].num);
-                                break;
-                            case 17:
-                                SetCardInfo(uc_Card17, card[num], card[num].num);
-                                break;
-                            case 18:
-                                SetCardInfo(uc_Card18, card[num], card[num].num);
-                                break;
-                            case 19:
-                                SetCardInfo(uc_Card19, card[num], card[num].num);
-                                break;
-                            case 20:
-                                SetCardInfo(uc_Card20, card[num], card[num].num);
-                                break;
-                            case 21:
-                                SetCardInfo(uc_Card21, card[num], card[num].num);
-                                break;
-                            case 22:
-                                SetCardInfo(uc_Card22, card[num], card[num].num);
-                                break;
-                            case 23:
-                                SetCardInfo(uc_Card23, card[num], card[num].num);
-                                break;
-                            case 24:
-                                SetCardInfo(uc_Card24, card[num], card[num].num);
-                                break;
-                            case 25:
-                                SetCardInfo(uc_Card25, card[num], card[num].num);
-                                break;
-                            case 26:
-                                SetCardInfo(uc_Card26, card[num], card[num].num);
-                                break;
-                            case 27:
-                                SetCardInfo(uc_Card27, card[num], card[num].num);
-                                break;
-                            case 28:
-                                SetCardInfo(uc_Card28, card[num], card[num].num);
-                                break;
-                            case 29:
-                                SetCardInfo(uc_Card29, card[num], card[num].num);
-                                break;
-                            case 30:
-                                SetCardInfo(uc_Card30, card[num], card[num].num);
-                                break;
+                            SetCardInfo(_ucCard[srNum], _cardInfo[srNum], _cardInfo[srNum].Num);
                         }
-                        num++;
                         srNum++;
                     }
-                    for(int i=srNum; i<card.Length; i++)
+                    for(int i=srNum; i< _cardInfo.Length; i++)
                     {
-                        if (card[i] != null)
+                        if (_cardInfo[i] != null)
                         {
-                            switch (i)
-                            {
-                                case 1: Btn_Delete_Click(card[i], uc_Card1); break;
-                                case 2: Btn_Delete_Click(card[i], uc_Card2); break;
-                                case 3: Btn_Delete_Click(card[i], uc_Card3); break;
-                                case 4: Btn_Delete_Click(card[i], uc_Card4); break;
-                                case 5: Btn_Delete_Click(card[i], uc_Card5); break;
-                                case 6: Btn_Delete_Click(card[i], uc_Card6); break;
-                                case 7: Btn_Delete_Click(card[i], uc_Card7); break;
-                                case 8: Btn_Delete_Click(card[i], uc_Card8); break;
-                                case 9: Btn_Delete_Click(card[i], uc_Card9); break;
-                                case 10: Btn_Delete_Click(card[i], uc_Card10); break;
-                                case 11: Btn_Delete_Click(card[i], uc_Card11); break;
-                                case 12: Btn_Delete_Click(card[i], uc_Card12); break;
-                                case 13: Btn_Delete_Click(card[i], uc_Card13); break;
-                                case 14: Btn_Delete_Click(card[i], uc_Card14); break;
-                                case 15: Btn_Delete_Click(card[i], uc_Card15); break;
-                                case 16: Btn_Delete_Click(card[i], uc_Card16); break;
-                                case 17: Btn_Delete_Click(card[i], uc_Card17); break;
-                                case 18: Btn_Delete_Click(card[i], uc_Card18); break;
-                                case 19: Btn_Delete_Click(card[i], uc_Card19); break;
-                                case 20: Btn_Delete_Click(card[i], uc_Card20); break;
-                                case 21: Btn_Delete_Click(card[i], uc_Card21); break;
-                                case 22: Btn_Delete_Click(card[i], uc_Card22); break;
-                                case 23: Btn_Delete_Click(card[i], uc_Card23); break;
-                                case 24: Btn_Delete_Click(card[i], uc_Card24); break;
-                                case 25: Btn_Delete_Click(card[i], uc_Card25); break;
-                                case 26: Btn_Delete_Click(card[i], uc_Card26); break;
-                                case 27: Btn_Delete_Click(card[i], uc_Card27); break;
-                                case 28: Btn_Delete_Click(card[i], uc_Card28); break;
-                                case 29: Btn_Delete_Click(card[i], uc_Card29); break;
-                                case 30: Btn_Delete_Click(card[i], uc_Card30); break;
-                            }
+                            Btn_Delete_Click(_cardInfo[i], _ucCard[i]);
                         }
                     }
                     tbx_Info_DeckName.Text = ofdDeck.SafeFileName.Replace(".csv", "");
                 }
-                num = 1;
+                //num = 1;
             }
 
-            int allNum = 0;
-            for (int i = 0; i < card.Length; i++)
-            {
-                if (card[i] != null)
-                {
-                    allNum += card[i].num;
-                }
-            }
-            tbx_Info_Num.Text = allNum.ToString();
+            //int allNum = 0;
+            //for (int i = 0; i < _cardInfo.Length; i++)
+            //{
+            //    if (_cardInfo[i] != null)
+            //    {
+            //        allNum += _cardInfo[i].Num;
+            //    }
+            //}
+            //tbx_Info_Num.Text = allNum.ToString();
         }
 
         private void btn_Rec_Save_Click(object sender, EventArgs e)
@@ -303,11 +184,11 @@ namespace Pokeka
 
             using (var sw = new System.IO.StreamWriter(pass, false, Encoding.UTF8))
             {
-                for (int i = 1; i < card.Length; i++)
+                for (int i = 1; i < _cardInfo.Length; i++)
                 {
-                    if (card[i] != null)
+                    if (_cardInfo[i] != null)
                     {
-                        sw.WriteLine("{0}, {1}, {2}, {3}", card[i].name, card[i].category, card[i].pictPass, card[i].num);
+                        sw.WriteLine("{0},{1},{2},{3}", _cardInfo[i].Name, _cardInfo[i].Category, _cardInfo[i].PictPass, _cardInfo[i].Num);
 
                     }
                 }
@@ -316,50 +197,114 @@ namespace Pokeka
 
         private void btn_Info_Show_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < card.Length; i++)
+            for (int i = 1; i < _cardInfo.Length; i++)
             {
-                if (card[i] != null)
+                if (_cardInfo[i] == null)
                 {
-                    switch (i)
-                    {
-                        case 1: Btn_Delete_Click(card[i], uc_Card1); break;
-                        case 2: Btn_Delete_Click(card[i], uc_Card2); break;
-                        case 3: Btn_Delete_Click(card[i], uc_Card3); break;
-                        case 4: Btn_Delete_Click(card[i], uc_Card4); break;
-                        case 5: Btn_Delete_Click(card[i], uc_Card5); break;
-                        case 6: Btn_Delete_Click(card[i], uc_Card6); break;
-                        case 7: Btn_Delete_Click(card[i], uc_Card7); break;
-                        case 8: Btn_Delete_Click(card[i], uc_Card8); break;
-                        case 9: Btn_Delete_Click(card[i], uc_Card9); break;
-                        case 10: Btn_Delete_Click(card[i], uc_Card10); break;
-                        case 11: Btn_Delete_Click(card[i], uc_Card11); break;
-                        case 12: Btn_Delete_Click(card[i], uc_Card12); break;
-                        case 13: Btn_Delete_Click(card[i], uc_Card13); break;
-                        case 14: Btn_Delete_Click(card[i], uc_Card14); break;
-                        case 15: Btn_Delete_Click(card[i], uc_Card15); break;
-                        case 16: Btn_Delete_Click(card[i], uc_Card16); break;
-                        case 17: Btn_Delete_Click(card[i], uc_Card17); break;
-                        case 18: Btn_Delete_Click(card[i], uc_Card18); break;
-                        case 19: Btn_Delete_Click(card[i], uc_Card19); break;
-                        case 20: Btn_Delete_Click(card[i], uc_Card20); break;
-                        case 21: Btn_Delete_Click(card[i], uc_Card21); break;
-                        case 22: Btn_Delete_Click(card[i], uc_Card22); break;
-                        case 23: Btn_Delete_Click(card[i], uc_Card23); break;
-                        case 24: Btn_Delete_Click(card[i], uc_Card24); break;
-                        case 25: Btn_Delete_Click(card[i], uc_Card25); break;
-                        case 26: Btn_Delete_Click(card[i], uc_Card26); break;
-                        case 27: Btn_Delete_Click(card[i], uc_Card27); break;
-                        case 28: Btn_Delete_Click(card[i], uc_Card28); break;
-                        case 29: Btn_Delete_Click(card[i], uc_Card29); break;
-                        case 30: Btn_Delete_Click(card[i], uc_Card30); break;
-                    }
+                    return;
+                    //Btn_Delete_Click(_cardInfo[i], _ucCard[i]);
                 }
+                Btn_Delete_Click(_cardInfo[i], _ucCard[i]);
             }
             tbx_Info_DeckName.Text = "";
             tbx_Info_Num.Text = "";
         }
 
+        public List<string> searchCardList = new List<string>();
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            searchCardList.Clear();
+            string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
+
+            foreach (string pathes in filesFullPath)
+            {
+                if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                {
+                    if (pathes.Contains(tbx_Search.Text))
+                    {
+                        if ((pathes.Contains(cbx_SearchCatego.Text)))
+                        {
+                            if ((pathes.Contains(cbx_SearchCatego2.Text)))
+                            {
+                                searchCardList.Add(pathes);
+                            }
+                        }
+                    }
+                }
+                else if (cbx_SearchCatego.Text != "すべて")
+                {
+                    if (pathes.Contains(tbx_Search.Text))
+                    {
+                        if ((pathes.Contains(cbx_SearchCatego.Text)))
+                        {
+                            searchCardList.Add(pathes);
+                        }
+                    }
+                }
+                else if (pathes.Contains(tbx_Search.Text))
+                {
+                    searchCardList.Add(pathes);
+                }
+
+            }
+
+            SearchForm sf = new SearchForm();
+            sf.Show();
+        }
+
+        private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (cbx_SearchCatego.SelectedIndex == 0)
+            //{
+            //    cbx_SearchCatego2.SelectedIndex = 0;
+            //    return;
+            //}
+            cbx_SearchCatego2.Text = "";
+            cbx_SearchCatego2.Items.Clear();
+
+            if (cbx_SearchCatego.Text == "ポケモン")
+            {
+                cbx_SearchCatego2.Text = "すべて";
+                cbx_SearchCatego2.Items.AddRange(new object[]
+                {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "鋼", "悪", "龍", "妖"});
+            }
+        }
+
         // ========== イベント関連 ==========
+        private void UcCardSet()
+        {
+            _ucCard[1] = uc_Card1;
+            _ucCard[2] = uc_Card2;
+            _ucCard[3] = uc_Card3;
+            _ucCard[4] = uc_Card4;
+            _ucCard[5] = uc_Card5;
+            _ucCard[6] = uc_Card6;
+            _ucCard[7] = uc_Card7;
+            _ucCard[8] = uc_Card8;
+            _ucCard[9] = uc_Card9;
+            _ucCard[10] = uc_Card10;
+            _ucCard[11] = uc_Card11;
+            _ucCard[12] = uc_Card12;
+            _ucCard[13] = uc_Card13;
+            _ucCard[14] = uc_Card14;
+            _ucCard[15] = uc_Card15;
+            _ucCard[16] = uc_Card16;
+            _ucCard[17] = uc_Card17;
+            _ucCard[18] = uc_Card18;
+            _ucCard[19] = uc_Card19;
+            _ucCard[20] = uc_Card20;
+            _ucCard[21] = uc_Card21;
+            _ucCard[22] = uc_Card22;
+            _ucCard[23] = uc_Card23;
+            _ucCard[24] = uc_Card24;
+            _ucCard[25] = uc_Card25;
+            _ucCard[26] = uc_Card26;
+            _ucCard[27] = uc_Card27;
+            _ucCard[28] = uc_Card28;
+            _ucCard[29] = uc_Card29;
+            _ucCard[30] = uc_Card30;
+        }
+
         private void EventSet()
         {
             uc_Card1.btn_Select.Click += new System.EventHandler(Uc_Card1_btn_SelectClick);
@@ -486,13 +431,13 @@ namespace Pokeka
 
         private void Uc_Card1_btn_SelectClick(object sender, EventArgs e)
         {
-            card[1] = new CardInfo();
-            Btn_Select_Click(card[1], uc_Card1, 1);
+            _cardInfo[1] = new CardInfo();
+            Btn_Select_Click(_cardInfo[1], uc_Card1, 1);
         }
 
         private void Uc_Card1_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[1], uc_Card1);
+            Btn_Delete_Click(_cardInfo[1], uc_Card1);
         }
 
         private void Uc_Card1_pbx_PictClick(object sender, EventArgs e)
@@ -502,18 +447,18 @@ namespace Pokeka
 
         private void Uc_Card1_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[1], uc_Card1);
+            Nud_ValueChanged(_cardInfo[1], uc_Card1);
         }
 
         private void Uc_Card2_btn_SelectClick(object sender, EventArgs e)
         {
-            card[2] = new CardInfo();
-            Btn_Select_Click(card[2], uc_Card2, 2);
+            _cardInfo[2] = new CardInfo();
+            Btn_Select_Click(_cardInfo[2], uc_Card2, 2);
         }
 
         private void Uc_Card2_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[2], uc_Card2);
+            Btn_Delete_Click(_cardInfo[2], uc_Card2);
         }
         private void Uc_Card2_pbx_PictClick(object sender, EventArgs e)
         {
@@ -521,18 +466,18 @@ namespace Pokeka
         }
         private void Uc_Card2_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[2], uc_Card2);
+            Nud_ValueChanged(_cardInfo[2], uc_Card2);
         }
 
         private void Uc_Card3_btn_SelectClick(object sender, EventArgs e)
         {
-            card[3] = new CardInfo();
-            Btn_Select_Click(card[3], uc_Card3,3);
+            _cardInfo[3] = new CardInfo();
+            Btn_Select_Click(_cardInfo[3], uc_Card3,3);
         }
 
         private void Uc_Card3_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[3], uc_Card3);
+            Btn_Delete_Click(_cardInfo[3], uc_Card3);
         }
 
         private void Uc_Card3_pbx_PictClick(object sender, EventArgs e)
@@ -541,18 +486,18 @@ namespace Pokeka
         }
         private void Uc_Card3_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[3], uc_Card3);
+            Nud_ValueChanged(_cardInfo[3], uc_Card3);
         }
 
         private void Uc_Card4_btn_SelectClick(object sender, EventArgs e)
         {
-            card[4] = new CardInfo();
-            Btn_Select_Click(card[4], uc_Card4, 4);
+            _cardInfo[4] = new CardInfo();
+            Btn_Select_Click(_cardInfo[4], uc_Card4, 4);
         }
 
         private void Uc_Card4_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[4], uc_Card4);
+            Btn_Delete_Click(_cardInfo[4], uc_Card4);
         }
         private void Uc_Card4_pbx_PictClick(object sender, EventArgs e)
         {
@@ -561,17 +506,17 @@ namespace Pokeka
 
         private void Uc_Card4_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[4], uc_Card4);
+            Nud_ValueChanged(_cardInfo[4], uc_Card4);
         }
         private void Uc_Card5_btn_SelectClick(object sender, EventArgs e)
         {
-            card[5] = new CardInfo();
-            Btn_Select_Click(card[5], uc_Card5, 5);
+            _cardInfo[5] = new CardInfo();
+            Btn_Select_Click(_cardInfo[5], uc_Card5, 5);
         }
 
         private void Uc_Card5_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[5], uc_Card5);
+            Btn_Delete_Click(_cardInfo[5], uc_Card5);
         }
 
         private void Uc_Card5_pbx_PictClick(object sender, EventArgs e)
@@ -580,17 +525,17 @@ namespace Pokeka
         }
         private void Uc_Card5_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[5], uc_Card5);
+            Nud_ValueChanged(_cardInfo[5], uc_Card5);
         }
         private void Uc_Card6_btn_SelectClick(object sender, EventArgs e)
         {
-            card[6] = new CardInfo();
-            Btn_Select_Click(card[6], uc_Card6, 6);
+            _cardInfo[6] = new CardInfo();
+            Btn_Select_Click(_cardInfo[6], uc_Card6, 6);
         }
 
         private void Uc_Card6_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[6], uc_Card6);
+            Btn_Delete_Click(_cardInfo[6], uc_Card6);
         }
         private void Uc_Card6_pbx_PictClick(object sender, EventArgs e)
         {
@@ -598,17 +543,17 @@ namespace Pokeka
         }
         private void Uc_Card6_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[6], uc_Card6);
+            Nud_ValueChanged(_cardInfo[6], uc_Card6);
         }
         private void Uc_Card7_btn_SelectClick(object sender, EventArgs e)
         {
-            card[7] = new CardInfo();
-            Btn_Select_Click(card[7], uc_Card7, 7);
+            _cardInfo[7] = new CardInfo();
+            Btn_Select_Click(_cardInfo[7], uc_Card7, 7);
         }
 
         private void Uc_Card7_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[7], uc_Card7);
+            Btn_Delete_Click(_cardInfo[7], uc_Card7);
         }
 
         private void Uc_Card7_pbx_PictClick(object sender, EventArgs e)
@@ -617,17 +562,17 @@ namespace Pokeka
         }
         private void Uc_Card7_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[7], uc_Card7);
+            Nud_ValueChanged(_cardInfo[7], uc_Card7);
         }
         private void Uc_Card8_btn_SelectClick(object sender, EventArgs e)
         {
-            card[8] = new CardInfo();
-            Btn_Select_Click(card[8], uc_Card8, 8);
+            _cardInfo[8] = new CardInfo();
+            Btn_Select_Click(_cardInfo[8], uc_Card8, 8);
         }
 
         private void Uc_Card8_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[8], uc_Card8);
+            Btn_Delete_Click(_cardInfo[8], uc_Card8);
         }
         private void Uc_Card8_pbx_PictClick(object sender, EventArgs e)
         {
@@ -635,17 +580,17 @@ namespace Pokeka
         }
         private void Uc_Card8_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[8], uc_Card8);
+            Nud_ValueChanged(_cardInfo[8], uc_Card8);
         }
         private void Uc_Card9_btn_SelectClick(object sender, EventArgs e)
         {
-            card[9] = new CardInfo();
-            Btn_Select_Click(card[9], uc_Card9, 9);
+            _cardInfo[9] = new CardInfo();
+            Btn_Select_Click(_cardInfo[9], uc_Card9, 9);
         }
 
         private void Uc_Card9_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[9], uc_Card9);
+            Btn_Delete_Click(_cardInfo[9], uc_Card9);
         }
 
         private void Uc_Card9_pbx_PictClick(object sender, EventArgs e)
@@ -654,18 +599,18 @@ namespace Pokeka
         }
         private void Uc_Card9_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[9], uc_Card9);
+            Nud_ValueChanged(_cardInfo[9], uc_Card9);
         }
 
         private void Uc_Card10_btn_SelectClick(object sender, EventArgs e)
         {
-            card[10] = new CardInfo();
-            Btn_Select_Click(card[10], uc_Card10, 10);
+            _cardInfo[10] = new CardInfo();
+            Btn_Select_Click(_cardInfo[10], uc_Card10, 10);
         }
 
         private void Uc_Card10_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[10], uc_Card10);
+            Btn_Delete_Click(_cardInfo[10], uc_Card10);
         }
         private void Uc_Card10_pbx_PictClick(object sender, EventArgs e)
         {
@@ -673,17 +618,17 @@ namespace Pokeka
         }
         private void Uc_Card10_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[10], uc_Card10);
+            Nud_ValueChanged(_cardInfo[10], uc_Card10);
         }
         private void Uc_Card11_btn_SelectClick(object sender, EventArgs e)
         {
-            card[11] = new CardInfo();
-            Btn_Select_Click(card[11], uc_Card11, 11);
+            _cardInfo[11] = new CardInfo();
+            Btn_Select_Click(_cardInfo[11], uc_Card11, 11);
         }
 
         private void Uc_Card11_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[11], uc_Card11);
+            Btn_Delete_Click(_cardInfo[11], uc_Card11);
         }
 
         private void Uc_Card11_pbx_PictClick(object sender, EventArgs e)
@@ -692,17 +637,17 @@ namespace Pokeka
         }
         private void Uc_Card11_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[11], uc_Card11);
+            Nud_ValueChanged(_cardInfo[11], uc_Card11);
         }
         private void Uc_Card12_btn_SelectClick(object sender, EventArgs e)
         {
-            card[12] = new CardInfo();
-            Btn_Select_Click(card[12], uc_Card12, 12);
+            _cardInfo[12] = new CardInfo();
+            Btn_Select_Click(_cardInfo[12], uc_Card12, 12);
         }
 
         private void Uc_Card12_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[12], uc_Card12);
+            Btn_Delete_Click(_cardInfo[12], uc_Card12);
         }
         private void Uc_Card12_pbx_PictClick(object sender, EventArgs e)
         {
@@ -710,17 +655,17 @@ namespace Pokeka
         }
         private void Uc_Card12_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[12], uc_Card12);
+            Nud_ValueChanged(_cardInfo[12], uc_Card12);
         }
         private void Uc_Card13_btn_SelectClick(object sender, EventArgs e)
         {
-            card[13] = new CardInfo();
-            Btn_Select_Click(card[13], uc_Card13, 13);
+            _cardInfo[13] = new CardInfo();
+            Btn_Select_Click(_cardInfo[13], uc_Card13, 13);
         }
 
         private void Uc_Card13_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[13], uc_Card13);
+            Btn_Delete_Click(_cardInfo[13], uc_Card13);
         }
 
         private void Uc_Card13_pbx_PictClick(object sender, EventArgs e)
@@ -729,17 +674,17 @@ namespace Pokeka
         }
         private void Uc_Card13_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[13], uc_Card13);
+            Nud_ValueChanged(_cardInfo[13], uc_Card13);
         }
         private void Uc_Card14_btn_SelectClick(object sender, EventArgs e)
         {
-            card[14] = new CardInfo();
-            Btn_Select_Click(card[14], uc_Card14, 14);
+            _cardInfo[14] = new CardInfo();
+            Btn_Select_Click(_cardInfo[14], uc_Card14, 14);
         }
 
         private void Uc_Card14_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[14], uc_Card14);
+            Btn_Delete_Click(_cardInfo[14], uc_Card14);
         }
         private void Uc_Card14_pbx_PictClick(object sender, EventArgs e)
         {
@@ -747,17 +692,17 @@ namespace Pokeka
         }
         private void Uc_Card14_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[14], uc_Card14);
+            Nud_ValueChanged(_cardInfo[14], uc_Card14);
         }
         private void Uc_Card15_btn_SelectClick(object sender, EventArgs e)
         {
-            card[15] = new CardInfo();
-            Btn_Select_Click(card[15], uc_Card15, 15);
+            _cardInfo[15] = new CardInfo();
+            Btn_Select_Click(_cardInfo[15], uc_Card15, 15);
         }
 
         private void Uc_Card15_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[15], uc_Card15);
+            Btn_Delete_Click(_cardInfo[15], uc_Card15);
         }
 
         private void Uc_Card15_pbx_PictClick(object sender, EventArgs e)
@@ -766,17 +711,17 @@ namespace Pokeka
         }
         private void Uc_Card15_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[15], uc_Card15);
+            Nud_ValueChanged(_cardInfo[15], uc_Card15);
         }
         private void Uc_Card16_btn_SelectClick(object sender, EventArgs e)
         {
-            card[16] = new CardInfo();
-            Btn_Select_Click(card[16], uc_Card16, 16);
+            _cardInfo[16] = new CardInfo();
+            Btn_Select_Click(_cardInfo[16], uc_Card16, 16);
         }
 
         private void Uc_Card16_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[16], uc_Card16);
+            Btn_Delete_Click(_cardInfo[16], uc_Card16);
         }
         private void Uc_Card16_pbx_PictClick(object sender, EventArgs e)
         {
@@ -784,17 +729,17 @@ namespace Pokeka
         }
         private void Uc_Card16_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[16], uc_Card16);
+            Nud_ValueChanged(_cardInfo[16], uc_Card16);
         }
         private void Uc_Card17_btn_SelectClick(object sender, EventArgs e)
         {
-            card[17] = new CardInfo();
-            Btn_Select_Click(card[17], uc_Card17, 17);
+            _cardInfo[17] = new CardInfo();
+            Btn_Select_Click(_cardInfo[17], uc_Card17, 17);
         }
 
         private void Uc_Card17_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[17], uc_Card17);
+            Btn_Delete_Click(_cardInfo[17], uc_Card17);
         }
         private void Uc_Card17_pbx_PictClick(object sender, EventArgs e)
         {
@@ -802,17 +747,17 @@ namespace Pokeka
         }
         private void Uc_Card17_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[17], uc_Card17);
+            Nud_ValueChanged(_cardInfo[17], uc_Card17);
         }
         private void Uc_Card18_btn_SelectClick(object sender, EventArgs e)
         {
-            card[18] = new CardInfo();
-            Btn_Select_Click(card[18], uc_Card18, 18);
+            _cardInfo[18] = new CardInfo();
+            Btn_Select_Click(_cardInfo[18], uc_Card18, 18);
         }
 
         private void Uc_Card18_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[18], uc_Card18);
+            Btn_Delete_Click(_cardInfo[18], uc_Card18);
         }
         private void Uc_Card18_pbx_PictClick(object sender, EventArgs e)
         {
@@ -820,17 +765,17 @@ namespace Pokeka
         }
         private void Uc_Card18_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[18], uc_Card18);
+            Nud_ValueChanged(_cardInfo[18], uc_Card18);
         }
         private void Uc_Card19_btn_SelectClick(object sender, EventArgs e)
         {
-            card[19] = new CardInfo();
-            Btn_Select_Click(card[19], uc_Card19, 19);
+            _cardInfo[19] = new CardInfo();
+            Btn_Select_Click(_cardInfo[19], uc_Card19, 19);
         }
 
         private void Uc_Card19_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[19], uc_Card19);
+            Btn_Delete_Click(_cardInfo[19], uc_Card19);
         }
         private void Uc_Card19_pbx_PictClick(object sender, EventArgs e)
         {
@@ -838,17 +783,17 @@ namespace Pokeka
         }
         private void Uc_Card19_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[19], uc_Card19);
+            Nud_ValueChanged(_cardInfo[19], uc_Card19);
         }
         private void Uc_Card20_btn_SelectClick(object sender, EventArgs e)
         {
-            card[20] = new CardInfo();
-            Btn_Select_Click(card[20], uc_Card20, 20);
+            _cardInfo[20] = new CardInfo();
+            Btn_Select_Click(_cardInfo[20], uc_Card20, 20);
         }
 
         private void Uc_Card20_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[20], uc_Card20);
+            Btn_Delete_Click(_cardInfo[20], uc_Card20);
         }
         private void Uc_Card20_pbx_PictClick(object sender, EventArgs e)
         {
@@ -856,17 +801,17 @@ namespace Pokeka
         }
         private void Uc_Card20_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[20], uc_Card20);
+            Nud_ValueChanged(_cardInfo[20], uc_Card20);
         }
         private void Uc_Card21_btn_SelectClick(object sender, EventArgs e)
         {
-            card[21] = new CardInfo();
-            Btn_Select_Click(card[21], uc_Card21, 21);
+            _cardInfo[21] = new CardInfo();
+            Btn_Select_Click(_cardInfo[21], uc_Card21, 21);
         }
 
         private void Uc_Card21_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[21], uc_Card21);
+            Btn_Delete_Click(_cardInfo[21], uc_Card21);
         }
         private void Uc_Card21_pbx_PictClick(object sender, EventArgs e)
         {
@@ -874,17 +819,17 @@ namespace Pokeka
         }
         private void Uc_Card21_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[21], uc_Card21);
+            Nud_ValueChanged(_cardInfo[21], uc_Card21);
         }
         private void Uc_Card22_btn_SelectClick(object sender, EventArgs e)
         {
-            card[22] = new CardInfo();
-            Btn_Select_Click(card[22], uc_Card22, 22);
+            _cardInfo[22] = new CardInfo();
+            Btn_Select_Click(_cardInfo[22], uc_Card22, 22);
         }
 
         private void Uc_Card22_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[22], uc_Card22);
+            Btn_Delete_Click(_cardInfo[22], uc_Card22);
         }
         private void Uc_Card22_pbx_PictClick(object sender, EventArgs e)
         {
@@ -892,17 +837,17 @@ namespace Pokeka
         }
         private void Uc_Card22_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[22], uc_Card22);
+            Nud_ValueChanged(_cardInfo[22], uc_Card22);
         }
         private void Uc_Card23_btn_SelectClick(object sender, EventArgs e)
         {
-            card[23] = new CardInfo();
-            Btn_Select_Click(card[23], uc_Card23, 23);
+            _cardInfo[23] = new CardInfo();
+            Btn_Select_Click(_cardInfo[23], uc_Card23, 23);
         }
 
         private void Uc_Card23_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[23], uc_Card23);
+            Btn_Delete_Click(_cardInfo[23], uc_Card23);
         }
         private void Uc_Card23_pbx_PictClick(object sender, EventArgs e)
         {
@@ -910,17 +855,17 @@ namespace Pokeka
         }
         private void Uc_Card23_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[23], uc_Card23);
+            Nud_ValueChanged(_cardInfo[23], uc_Card23);
         }
         private void Uc_Card24_btn_SelectClick(object sender, EventArgs e)
         {
-            card[24] = new CardInfo();
-            Btn_Select_Click(card[24], uc_Card24, 24);
+            _cardInfo[24] = new CardInfo();
+            Btn_Select_Click(_cardInfo[24], uc_Card24, 24);
         }
 
         private void Uc_Card24_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[24], uc_Card24);
+            Btn_Delete_Click(_cardInfo[24], uc_Card24);
         }
         private void Uc_Card24_pbx_PictClick(object sender, EventArgs e)
         {
@@ -928,18 +873,18 @@ namespace Pokeka
         }
         private void Uc_Card24_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[24], uc_Card24);
+            Nud_ValueChanged(_cardInfo[24], uc_Card24);
         }
 
         private void Uc_Card25_btn_SelectClick(object sender, EventArgs e)
         {
-            card[25] = new CardInfo();
-            Btn_Select_Click(card[25], uc_Card25, 25);
+            _cardInfo[25] = new CardInfo();
+            Btn_Select_Click(_cardInfo[25], uc_Card25, 25);
         }
 
         private void Uc_Card25_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[25], uc_Card25);
+            Btn_Delete_Click(_cardInfo[25], uc_Card25);
         }
         private void Uc_Card25_pbx_PictClick(object sender, EventArgs e)
         {
@@ -947,17 +892,17 @@ namespace Pokeka
         }
         private void Uc_Card25_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[25], uc_Card25);
+            Nud_ValueChanged(_cardInfo[25], uc_Card25);
         }
         private void Uc_Card26_btn_SelectClick(object sender, EventArgs e)
         {
-            card[26] = new CardInfo();
-            Btn_Select_Click(card[26], uc_Card26, 26);
+            _cardInfo[26] = new CardInfo();
+            Btn_Select_Click(_cardInfo[26], uc_Card26, 26);
         }
 
         private void Uc_Card26_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[26], uc_Card26);
+            Btn_Delete_Click(_cardInfo[26], uc_Card26);
         }
         private void Uc_Card26_pbx_PictClick(object sender, EventArgs e)
         {
@@ -965,17 +910,17 @@ namespace Pokeka
         }
         private void Uc_Card26_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[26], uc_Card26);
+            Nud_ValueChanged(_cardInfo[26], uc_Card26);
         }
         private void Uc_Card27_btn_SelectClick(object sender, EventArgs e)
         {
-            card[27] = new CardInfo();
-            Btn_Select_Click(card[27], uc_Card27, 27);
+            _cardInfo[27] = new CardInfo();
+            Btn_Select_Click(_cardInfo[27], uc_Card27, 27);
         }
 
         private void Uc_Card27_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[27], uc_Card27);
+            Btn_Delete_Click(_cardInfo[27], uc_Card27);
         }
         private void Uc_Card27_pbx_PictClick(object sender, EventArgs e)
         {
@@ -983,17 +928,17 @@ namespace Pokeka
         }
         private void Uc_Card27_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[27], uc_Card27);
+            Nud_ValueChanged(_cardInfo[27], uc_Card27);
         }
         private void Uc_Card28_btn_SelectClick(object sender, EventArgs e)
         {
-            card[28] = new CardInfo();
-            Btn_Select_Click(card[28], uc_Card28, 28);
+            _cardInfo[28] = new CardInfo();
+            Btn_Select_Click(_cardInfo[28], uc_Card28, 28);
         }
 
         private void Uc_Card28_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[28], uc_Card28);
+            Btn_Delete_Click(_cardInfo[28], uc_Card28);
         }
         private void Uc_Card28_pbx_PictClick(object sender, EventArgs e)
         {
@@ -1001,17 +946,17 @@ namespace Pokeka
         }
         private void Uc_Card28_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[28], uc_Card28);
+            Nud_ValueChanged(_cardInfo[28], uc_Card28);
         }
         private void Uc_Card29_btn_SelectClick(object sender, EventArgs e)
         {
-            card[29] = new CardInfo();
-            Btn_Select_Click(card[29], uc_Card29, 29);
+            _cardInfo[29] = new CardInfo();
+            Btn_Select_Click(_cardInfo[29], uc_Card29, 29);
         }
 
         private void Uc_Card29_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[29], uc_Card29);
+            Btn_Delete_Click(_cardInfo[29], uc_Card29);
         }
         private void Uc_Card29_pbx_PictClick(object sender, EventArgs e)
         {
@@ -1019,17 +964,17 @@ namespace Pokeka
         }
         private void Uc_Card29_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[29], uc_Card29);
+            Nud_ValueChanged(_cardInfo[29], uc_Card29);
         }
         private void Uc_Card30_btn_SelectClick(object sender, EventArgs e)
         {
-            card[30] = new CardInfo();
-            Btn_Select_Click(card[30], uc_Card30, 30);
+            _cardInfo[30] = new CardInfo();
+            Btn_Select_Click(_cardInfo[30], uc_Card30, 30);
         }
 
         private void Uc_Card30_btn_DeleteClick(object sender, EventArgs e)
         {
-            Btn_Delete_Click(card[30], uc_Card30);
+            Btn_Delete_Click(_cardInfo[30], uc_Card30);
         }
         private void Uc_Card30_pbx_PictClick(object sender, EventArgs e)
         {
@@ -1037,70 +982,12 @@ namespace Pokeka
         }
         private void Uc_Card30_nud_ValueChanged(object sender, EventArgs e)
         {
-            Nud_ValueChanged(card[30], uc_Card30);
+            Nud_ValueChanged(_cardInfo[30], uc_Card30);
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        public List<string> searchCardList = new List<string>();
-        private void btn_Search_Click(object sender, EventArgs e)
-        {
-            searchCardList.Clear();
-            string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
-
-            foreach (string pathes in filesFullPath)
-            {
-                if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
-                {
-                    if (pathes.Contains(tbx_Search.Text))
-                    {
-                        if ((pathes.Contains(cbx_SearchCatego.Text)))
-                        {
-                            if ((pathes.Contains(cbx_SearchCatego2.Text)))
-                            {
-                                searchCardList.Add(pathes);
-                            }
-                        }
-                    }
-                }
-                else if (cbx_SearchCatego.Text != "すべて")
-                {
-                    if (pathes.Contains(tbx_Search.Text))
-                    {
-                        if ((pathes.Contains(cbx_SearchCatego.Text)))
-                        {
-                            searchCardList.Add(pathes);
-                        }
-                    }
-                }
-                else if (pathes.Contains(tbx_Search.Text))
-                {
-                    searchCardList.Add(pathes);
-                }
-            
-            }
-
-            SearchForm sf = new SearchForm();
-            sf.Show();
-        }
-
-        private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cbx_SearchCatego.SelectedIndex == 0)
-            {
-                cbx_SearchCatego2.SelectedIndex = 0;
-                return;
-            }
-
-            if (cbx_SearchCatego.Text == "ポケモン")
-            {
-                cbx_SearchCatego2.Text = "すべて";
-                cbx_SearchCatego2.Items.AddRange(new object[] 
-                {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "鋼", "悪", "龍", "妖"});
-            }
         }
     }
 }

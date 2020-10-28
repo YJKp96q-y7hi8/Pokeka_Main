@@ -47,13 +47,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 652);
+            this.ClientSize = new System.Drawing.Size(538, 699);
             this.Controls.Add(this.pbx_Image);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximumSize = new System.Drawing.Size(538, 699);
             this.MinimumSize = new System.Drawing.Size(538, 699);
             this.Name = "ShowPict";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Image)).EndInit();
             this.ResumeLayout(false);
 

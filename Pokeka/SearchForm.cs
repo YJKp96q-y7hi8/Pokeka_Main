@@ -7,14 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Pokeka
 {
     public partial class SearchForm : Form
     {
         PictureBox[] pictureBoxes = new PictureBox[30];
-
         int listNum = 0;
+
+        //FormMainオブジェクトを保持ずるためのフィールド
+        private static SearchForm _searchFormInstance;
+        //FormMainオブジェクトを取得・設定するためのプロパティ
+        public static SearchForm SearchFormInstance
+        {
+            get { return _searchFormInstance; }
+            set { _searchFormInstance = value; }
+        }
 
         public SearchForm()
         {
@@ -53,6 +62,11 @@ namespace Pokeka
 
         private void SearchForm_Load(object sender, EventArgs e)
         {
+            if(FormMain.Form1Instance.searchCardList.Count == 0)
+            {
+                return;
+            }
+
             if (FormMain.Form1Instance.searchCardList.Count > 30)
             {
                 for (int i = 0; i < 30; i++)
@@ -115,6 +129,198 @@ namespace Pokeka
             {
                 pictureBoxes[i - listNum].ImageLocation = FormMain.Form1Instance.searchCardList[i];
             }
+        }
+
+        private void SelectCard(PictureBox sender)
+        {
+            if(sender.ImageLocation == null)
+            {
+                return;
+            }
+
+            try
+            {
+                CardInfo newCardInfo = null;
+                uc_Card newUcCard = null;
+                for(int i = 1; i<31; i++)
+                {
+                    if(FormMain.Form1Instance._cardInfo[i] == null)
+                    {
+                        FormMain.Form1Instance._cardInfo[i] = new CardInfo();
+                        newCardInfo = FormMain.Form1Instance._cardInfo[i];
+                        newUcCard = FormMain.Form1Instance._ucCard[i];
+                        break;
+                    }
+                }
+                if(newCardInfo == null || newUcCard == null)
+                {
+                    MessageBox.Show("追加できません");
+                    return;
+                }
+                newCardInfo.SetCardInfo(Path.GetFileName(sender.ImageLocation), sender.ImageLocation);
+                FormMain.Form1Instance.SetCardInfo(newUcCard, newCardInfo, 1);
+                FormMain.Form1Instance.Nud_ValueChanged(newCardInfo, newUcCard);
+            }
+            catch
+            {
+                MessageBox.Show("謎エラー");
+            }
+            this.Close();
+        }
+
+        private void pbx_01_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_02_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_03_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_04_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_05_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_06_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_07_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_08_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_09_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_10_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_11_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_12_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_13_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_14_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_15_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_16_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_17_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_18_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_19_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_20_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_21_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_22_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_23_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_24_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_25_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_26_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_27_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_28_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_29_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void pbx_30_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
