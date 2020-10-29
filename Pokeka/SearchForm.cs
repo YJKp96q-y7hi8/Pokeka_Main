@@ -168,6 +168,11 @@ namespace Pokeka
             this.Close();
         }
 
+        private void pbx_Click(object sender, EventArgs e)
+        {
+            SelectCard((PictureBox)sender);
+        }
+
         private void pbx_01_Click(object sender, EventArgs e)
         {
             SelectCard((PictureBox)sender);
@@ -321,6 +326,16 @@ namespace Pokeka
         private void btn_Close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SearchForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            //this.Close();
+        }
+
+        private void SearchForm_Shown(object sender, EventArgs e)
+        {
+            pbx_01.Focus();
         }
     }
 }

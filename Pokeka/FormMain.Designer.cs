@@ -40,6 +40,12 @@
             this.btn_Rec_Set = new System.Windows.Forms.Button();
             this.btn_Rec_Save = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.gbx_Search = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbx_Search = new System.Windows.Forms.TextBox();
+            this.cbx_SearchCatego1 = new System.Windows.Forms.ComboBox();
+            this.btn_Search = new System.Windows.Forms.Button();
+            this.cbx_SearchCatego2 = new System.Windows.Forms.ComboBox();
             this.uc_Card1 = new Pokeka.uc_Card();
             this.uc_Card30 = new Pokeka.uc_Card();
             this.uc_Card2 = new Pokeka.uc_Card();
@@ -68,14 +74,9 @@
             this.uc_Card22 = new Pokeka.uc_Card();
             this.uc_Card16 = new Pokeka.uc_Card();
             this.uc_Card21 = new Pokeka.uc_Card();
-            this.gbx_Search = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbx_Search = new System.Windows.Forms.TextBox();
-            this.cbx_SearchCatego = new System.Windows.Forms.ComboBox();
-            this.btn_Search = new System.Windows.Forms.Button();
-            this.cbx_SearchCatego2 = new System.Windows.Forms.ComboBox();
             this.uc_Card14 = new Pokeka.uc_Card();
             this.uc_Card10 = new Pokeka.uc_Card();
+            this.cbx_SearchCatego3 = new System.Windows.Forms.ComboBox();
             this.gbx_Info.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbx_Rec.SuspendLayout();
@@ -148,6 +149,7 @@
             this.tbx_Info_Num.Size = new System.Drawing.Size(53, 22);
             this.tbx_Info_Num.TabIndex = 2;
             this.tbx_Info_Num.Text = "0";
+            this.tbx_Info_Num.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // tbx_Info_DeckName
             // 
@@ -156,6 +158,7 @@
             this.tbx_Info_DeckName.Name = "tbx_Info_DeckName";
             this.tbx_Info_DeckName.Size = new System.Drawing.Size(390, 22);
             this.tbx_Info_DeckName.TabIndex = 0;
+            this.tbx_Info_DeckName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // lbl_Info_Num
             // 
@@ -260,9 +263,9 @@
             this.tableLayoutPanel3.Controls.Add(this.uc_Card22, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.uc_Card16, 5, 2);
             this.tableLayoutPanel3.Controls.Add(this.uc_Card21, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.gbx_Search, 7, 0);
             this.tableLayoutPanel3.Controls.Add(this.uc_Card14, 3, 2);
             this.tableLayoutPanel3.Controls.Add(this.uc_Card10, 9, 1);
+            this.tableLayoutPanel3.Controls.Add(this.gbx_Search, 6, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -273,7 +276,89 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.80952F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.80952F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1903, 1200);
-            this.tableLayoutPanel3.TabIndex = 33;
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // gbx_Search
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.gbx_Search, 4);
+            this.gbx_Search.Controls.Add(this.tableLayoutPanel4);
+            this.gbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbx_Search.Location = new System.Drawing.Point(1143, 3);
+            this.gbx_Search.Name = "gbx_Search";
+            this.gbx_Search.Size = new System.Drawing.Size(757, 51);
+            this.gbx_Search.TabIndex = 0;
+            this.gbx_Search.TabStop = false;
+            this.gbx_Search.Text = "検索";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 5;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.Controls.Add(this.tbx_Search, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btn_Search, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego3, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego2, 2, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(751, 30);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // tbx_Search
+            // 
+            this.tbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbx_Search.Location = new System.Drawing.Point(3, 3);
+            this.tbx_Search.Name = "tbx_Search";
+            this.tbx_Search.Size = new System.Drawing.Size(275, 22);
+            this.tbx_Search.TabIndex = 1;
+            this.tbx_Search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
+            // 
+            // cbx_SearchCatego1
+            // 
+            this.cbx_SearchCatego1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_SearchCatego1.FormattingEnabled = true;
+            this.cbx_SearchCatego1.Items.AddRange(new object[] {
+            "カテゴリ",
+            "ポケモン",
+            "グッズ",
+            "サポート",
+            "スタジアム",
+            "エネルギー"});
+            this.cbx_SearchCatego1.Location = new System.Drawing.Point(284, 3);
+            this.cbx_SearchCatego1.Name = "cbx_SearchCatego1";
+            this.cbx_SearchCatego1.Size = new System.Drawing.Size(119, 23);
+            this.cbx_SearchCatego1.TabIndex = 2;
+            this.cbx_SearchCatego1.Text = "カテゴリ(すべて)";
+            this.cbx_SearchCatego1.SelectedIndexChanged += new System.EventHandler(this.cbx_SearchCatego_SelectedIndexChanged);
+            this.cbx_SearchCatego1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Search.Location = new System.Drawing.Point(659, 3);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(89, 24);
+            this.btn_Search.TabIndex = 0;
+            this.btn_Search.Text = "検索";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // cbx_SearchCatego2
+            // 
+            this.cbx_SearchCatego2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_SearchCatego2.FormattingEnabled = true;
+            this.cbx_SearchCatego2.Location = new System.Drawing.Point(409, 3);
+            this.cbx_SearchCatego2.Name = "cbx_SearchCatego2";
+            this.cbx_SearchCatego2.Size = new System.Drawing.Size(119, 23);
+            this.cbx_SearchCatego2.TabIndex = 3;
+            this.cbx_SearchCatego2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // uc_Card1
             // 
@@ -284,6 +369,10 @@
             this.uc_Card1.Name = "uc_Card1";
             this.uc_Card1.Size = new System.Drawing.Size(186, 281);
             this.uc_Card1.TabIndex = 1;
+            this.uc_Card1.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card1.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card1.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card1.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card30
             // 
@@ -294,6 +383,10 @@
             this.uc_Card30.Name = "uc_Card30";
             this.uc_Card30.Size = new System.Drawing.Size(189, 281);
             this.uc_Card30.TabIndex = 32;
+            this.uc_Card30.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card30.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card30.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card30.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card2
             // 
@@ -304,6 +397,10 @@
             this.uc_Card2.Name = "uc_Card2";
             this.uc_Card2.Size = new System.Drawing.Size(186, 281);
             this.uc_Card2.TabIndex = 2;
+            this.uc_Card2.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card2.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card2.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card2.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card29
             // 
@@ -314,6 +411,10 @@
             this.uc_Card29.Name = "uc_Card29";
             this.uc_Card29.Size = new System.Drawing.Size(186, 281);
             this.uc_Card29.TabIndex = 31;
+            this.uc_Card29.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card29.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card29.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card29.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card3
             // 
@@ -324,6 +425,10 @@
             this.uc_Card3.Name = "uc_Card3";
             this.uc_Card3.Size = new System.Drawing.Size(186, 281);
             this.uc_Card3.TabIndex = 3;
+            this.uc_Card3.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card3.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card3.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card3.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card28
             // 
@@ -334,6 +439,10 @@
             this.uc_Card28.Name = "uc_Card28";
             this.uc_Card28.Size = new System.Drawing.Size(186, 281);
             this.uc_Card28.TabIndex = 30;
+            this.uc_Card28.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card28.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card28.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card28.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card4
             // 
@@ -344,6 +453,10 @@
             this.uc_Card4.Name = "uc_Card4";
             this.uc_Card4.Size = new System.Drawing.Size(186, 281);
             this.uc_Card4.TabIndex = 4;
+            this.uc_Card4.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card4.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card4.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card4.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card27
             // 
@@ -354,6 +467,10 @@
             this.uc_Card27.Name = "uc_Card27";
             this.uc_Card27.Size = new System.Drawing.Size(186, 281);
             this.uc_Card27.TabIndex = 29;
+            this.uc_Card27.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card27.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card27.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card27.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card5
             // 
@@ -364,6 +481,10 @@
             this.uc_Card5.Name = "uc_Card5";
             this.uc_Card5.Size = new System.Drawing.Size(186, 281);
             this.uc_Card5.TabIndex = 5;
+            this.uc_Card5.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card5.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card5.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card5.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card26
             // 
@@ -374,6 +495,10 @@
             this.uc_Card26.Name = "uc_Card26";
             this.uc_Card26.Size = new System.Drawing.Size(186, 281);
             this.uc_Card26.TabIndex = 28;
+            this.uc_Card26.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card26.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card26.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card26.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card6
             // 
@@ -384,6 +509,10 @@
             this.uc_Card6.Name = "uc_Card6";
             this.uc_Card6.Size = new System.Drawing.Size(186, 281);
             this.uc_Card6.TabIndex = 6;
+            this.uc_Card6.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card6.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card6.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card6.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card20
             // 
@@ -394,6 +523,10 @@
             this.uc_Card20.Name = "uc_Card20";
             this.uc_Card20.Size = new System.Drawing.Size(189, 281);
             this.uc_Card20.TabIndex = 20;
+            this.uc_Card20.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card20.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card20.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card20.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card25
             // 
@@ -404,6 +537,10 @@
             this.uc_Card25.Name = "uc_Card25";
             this.uc_Card25.Size = new System.Drawing.Size(186, 281);
             this.uc_Card25.TabIndex = 27;
+            this.uc_Card25.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card25.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card25.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card25.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card19
             // 
@@ -414,6 +551,10 @@
             this.uc_Card19.Name = "uc_Card19";
             this.uc_Card19.Size = new System.Drawing.Size(186, 281);
             this.uc_Card19.TabIndex = 19;
+            this.uc_Card19.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card19.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card19.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card19.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card11
             // 
@@ -424,6 +565,10 @@
             this.uc_Card11.Name = "uc_Card11";
             this.uc_Card11.Size = new System.Drawing.Size(186, 281);
             this.uc_Card11.TabIndex = 11;
+            this.uc_Card11.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card11.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card11.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card11.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card18
             // 
@@ -434,6 +579,10 @@
             this.uc_Card18.Name = "uc_Card18";
             this.uc_Card18.Size = new System.Drawing.Size(186, 281);
             this.uc_Card18.TabIndex = 18;
+            this.uc_Card18.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card18.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card18.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card18.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card12
             // 
@@ -444,6 +593,10 @@
             this.uc_Card12.Name = "uc_Card12";
             this.uc_Card12.Size = new System.Drawing.Size(186, 281);
             this.uc_Card12.TabIndex = 12;
+            this.uc_Card12.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card12.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card12.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card12.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card17
             // 
@@ -454,6 +607,10 @@
             this.uc_Card17.Name = "uc_Card17";
             this.uc_Card17.Size = new System.Drawing.Size(186, 281);
             this.uc_Card17.TabIndex = 17;
+            this.uc_Card17.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card17.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card17.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card17.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card13
             // 
@@ -464,6 +621,10 @@
             this.uc_Card13.Name = "uc_Card13";
             this.uc_Card13.Size = new System.Drawing.Size(186, 281);
             this.uc_Card13.TabIndex = 13;
+            this.uc_Card13.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card13.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card13.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card13.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card24
             // 
@@ -474,6 +635,10 @@
             this.uc_Card24.Name = "uc_Card24";
             this.uc_Card24.Size = new System.Drawing.Size(186, 281);
             this.uc_Card24.TabIndex = 24;
+            this.uc_Card24.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card24.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card24.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card24.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card9
             // 
@@ -484,6 +649,10 @@
             this.uc_Card9.Name = "uc_Card9";
             this.uc_Card9.Size = new System.Drawing.Size(186, 281);
             this.uc_Card9.TabIndex = 9;
+            this.uc_Card9.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card9.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card9.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card9.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card8
             // 
@@ -494,6 +663,10 @@
             this.uc_Card8.Name = "uc_Card8";
             this.uc_Card8.Size = new System.Drawing.Size(186, 281);
             this.uc_Card8.TabIndex = 8;
+            this.uc_Card8.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card8.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card8.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card8.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card23
             // 
@@ -504,6 +677,10 @@
             this.uc_Card23.Name = "uc_Card23";
             this.uc_Card23.Size = new System.Drawing.Size(186, 281);
             this.uc_Card23.TabIndex = 23;
+            this.uc_Card23.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card23.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card23.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card23.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card7
             // 
@@ -514,6 +691,10 @@
             this.uc_Card7.Name = "uc_Card7";
             this.uc_Card7.Size = new System.Drawing.Size(186, 281);
             this.uc_Card7.TabIndex = 7;
+            this.uc_Card7.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card7.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card7.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card7.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card15
             // 
@@ -524,6 +705,10 @@
             this.uc_Card15.Name = "uc_Card15";
             this.uc_Card15.Size = new System.Drawing.Size(186, 281);
             this.uc_Card15.TabIndex = 15;
+            this.uc_Card15.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card15.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card15.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card15.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card22
             // 
@@ -534,6 +719,10 @@
             this.uc_Card22.Name = "uc_Card22";
             this.uc_Card22.Size = new System.Drawing.Size(186, 281);
             this.uc_Card22.TabIndex = 22;
+            this.uc_Card22.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card22.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card22.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card22.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card16
             // 
@@ -544,6 +733,10 @@
             this.uc_Card16.Name = "uc_Card16";
             this.uc_Card16.Size = new System.Drawing.Size(186, 281);
             this.uc_Card16.TabIndex = 16;
+            this.uc_Card16.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card16.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card16.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card16.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card21
             // 
@@ -554,80 +747,10 @@
             this.uc_Card21.Name = "uc_Card21";
             this.uc_Card21.Size = new System.Drawing.Size(186, 281);
             this.uc_Card21.TabIndex = 21;
-            // 
-            // gbx_Search
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.gbx_Search, 3);
-            this.gbx_Search.Controls.Add(this.tableLayoutPanel4);
-            this.gbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbx_Search.Location = new System.Drawing.Point(1333, 3);
-            this.gbx_Search.Name = "gbx_Search";
-            this.gbx_Search.Size = new System.Drawing.Size(567, 51);
-            this.gbx_Search.TabIndex = 33;
-            this.gbx_Search.TabStop = false;
-            this.gbx_Search.Text = "検索";
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 4;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel4.Controls.Add(this.tbx_Search, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btn_Search, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.cbx_SearchCatego2, 2, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 18);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(561, 30);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // tbx_Search
-            // 
-            this.tbx_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbx_Search.Location = new System.Drawing.Point(3, 3);
-            this.tbx_Search.Name = "tbx_Search";
-            this.tbx_Search.Size = new System.Drawing.Size(246, 22);
-            this.tbx_Search.TabIndex = 0;
-            // 
-            // cbx_SearchCatego
-            // 
-            this.cbx_SearchCatego.FormattingEnabled = true;
-            this.cbx_SearchCatego.Items.AddRange(new object[] {
-            "すべて",
-            "ポケモン",
-            "グッズ",
-            "サポート",
-            "スタジアム",
-            "エネルギー"});
-            this.cbx_SearchCatego.Location = new System.Drawing.Point(255, 3);
-            this.cbx_SearchCatego.Name = "cbx_SearchCatego";
-            this.cbx_SearchCatego.Size = new System.Drawing.Size(106, 23);
-            this.cbx_SearchCatego.TabIndex = 2;
-            this.cbx_SearchCatego.Text = "すべて";
-            this.cbx_SearchCatego.SelectedIndexChanged += new System.EventHandler(this.cbx_SearchCatego_SelectedIndexChanged);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(479, 3);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(79, 24);
-            this.btn_Search.TabIndex = 1;
-            this.btn_Search.Text = "検索";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // cbx_SearchCatego2
-            // 
-            this.cbx_SearchCatego2.FormattingEnabled = true;
-            this.cbx_SearchCatego2.Location = new System.Drawing.Point(367, 3);
-            this.cbx_SearchCatego2.Name = "cbx_SearchCatego2";
-            this.cbx_SearchCatego2.Size = new System.Drawing.Size(106, 23);
-            this.cbx_SearchCatego2.TabIndex = 3;
+            this.uc_Card21.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card21.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card21.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card21.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card14
             // 
@@ -638,6 +761,10 @@
             this.uc_Card14.Name = "uc_Card14";
             this.uc_Card14.Size = new System.Drawing.Size(186, 281);
             this.uc_Card14.TabIndex = 14;
+            this.uc_Card14.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card14.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card14.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card14.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
             // 
             // uc_Card10
             // 
@@ -648,6 +775,20 @@
             this.uc_Card10.Name = "uc_Card10";
             this.uc_Card10.Size = new System.Drawing.Size(189, 281);
             this.uc_Card10.TabIndex = 10;
+            this.uc_Card10.Click_Btn_Select += new System.EventHandler(this.Click_Btn_Select);
+            this.uc_Card10.Click_Btn_Delete += new System.EventHandler(this.Click_Btn_Delete);
+            this.uc_Card10.Click_Pbx_Pict += new System.EventHandler(this.Click_Pbx_Pict);
+            this.uc_Card10.ValueChanged_Nud_Num += new System.EventHandler(this.Click_Nud_Num);
+            // 
+            // cbx_SearchCatego3
+            // 
+            this.cbx_SearchCatego3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_SearchCatego3.FormattingEnabled = true;
+            this.cbx_SearchCatego3.Location = new System.Drawing.Point(534, 3);
+            this.cbx_SearchCatego3.Name = "cbx_SearchCatego3";
+            this.cbx_SearchCatego3.Size = new System.Drawing.Size(119, 23);
+            this.cbx_SearchCatego3.TabIndex = 4;
+            this.cbx_SearchCatego3.Text = "パック(すべて)";
             // 
             // FormMain
             // 
@@ -656,9 +797,11 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1924, 833);
             this.Controls.Add(this.tableLayoutPanel3);
+            this.KeyPreview = true;
             this.Name = "FormMain";
             this.Text = "ポケカデッキメーカー";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.gbx_Info.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -719,8 +862,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox tbx_Search;
         private System.Windows.Forms.Button btn_Search;
-        private System.Windows.Forms.ComboBox cbx_SearchCatego;
+        private System.Windows.Forms.ComboBox cbx_SearchCatego1;
         private System.Windows.Forms.ComboBox cbx_SearchCatego2;
+        private System.Windows.Forms.ComboBox cbx_SearchCatego3;
     }
 }
 

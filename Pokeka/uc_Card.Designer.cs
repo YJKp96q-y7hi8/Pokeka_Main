@@ -30,8 +30,8 @@
         {
             this.gbx_Card = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pbx_Pict = new System.Windows.Forms.PictureBox();
             this.btn_Delete = new System.Windows.Forms.Button();
+            this.pbx_Pict = new System.Windows.Forms.PictureBox();
             this.btn_Select = new System.Windows.Forms.Button();
             this.nud_Num = new System.Windows.Forms.NumericUpDown();
             this.gbx_Card.SuspendLayout();
@@ -69,18 +69,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(185, 261);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // pbx_Pict
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.pbx_Pict, 3);
-            this.pbx_Pict.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbx_Pict.Location = new System.Drawing.Point(3, 3);
-            this.pbx_Pict.Name = "pbx_Pict";
-            this.pbx_Pict.Size = new System.Drawing.Size(179, 215);
-            this.pbx_Pict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbx_Pict.TabIndex = 3;
-            this.pbx_Pict.TabStop = false;
-            this.pbx_Pict.Click += new System.EventHandler(this.pbx_Pict_Click);
-            // 
             // btn_Delete
             // 
             this.btn_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -91,6 +79,19 @@
             this.btn_Delete.Text = "削除";
             this.btn_Delete.UseVisualStyleBackColor = true;
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // pbx_Pict
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.pbx_Pict, 3);
+            this.pbx_Pict.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbx_Pict.Location = new System.Drawing.Point(3, 3);
+            this.pbx_Pict.Name = "pbx_Pict";
+            this.pbx_Pict.Size = new System.Drawing.Size(179, 215);
+            this.pbx_Pict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbx_Pict.TabIndex = 3;
+            this.pbx_Pict.TabStop = false;
+            this.pbx_Pict.WaitOnLoad = true;
+            this.pbx_Pict.Click += new System.EventHandler(this.pbx_Pict_Click);
             // 
             // btn_Select
             // 
