@@ -222,39 +222,103 @@ namespace Pokeka
         private void SearchCard()
         {
             searchCardList.Clear();
-            string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
+            string directoryPath = @"Card List";
 
-            foreach (string pathes in filesFullPath)
+            if (cbx_SearchCatego1.Text != "カテゴリ(すべて)")
             {
-                if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                if (cbx_SearchCatego3.Text != "パック(すべて)")
                 {
-                    if (pathes.Contains(tbx_Search.Text))
+                    if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
                     {
-                        if ((pathes.Contains(cbx_SearchCatego1.Text)))
+                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
+                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego3.Text;
+                        string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego2.Text;
+
+                        string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
+                        foreach (string pathes in filesFullPath)
                         {
-                            if ((pathes.Contains(cbx_SearchCatego2.Text)))
-                            {
+                            if (pathes.Contains(directory2Path))
                                 searchCardList.Add(pathes);
-                            }
                         }
                     }
-                }
-                else if (cbx_SearchCatego1.Text != "すべて")
-                {
-                    if (pathes.Contains(tbx_Search.Text))
+                    else
                     {
-                        if ((pathes.Contains(cbx_SearchCatego1.Text)))
+                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
+                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego3.Text;
+                        string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
+                        foreach (string pathes in filesFullPath)
                         {
                             searchCardList.Add(pathes);
                         }
                     }
                 }
-                else if (pathes.Contains(tbx_Search.Text))
+                else if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                {
+                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
+                    string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego2.Text;
+
+                    string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
+                    foreach (string pathes in filesFullPath)
+                    {
+                        if(pathes.Contains(directory2Path))
+                            searchCardList.Add(pathes);
+                    }
+                }
+                else
+                {
+                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
+                    string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
+                    foreach (string pathes in filesFullPath)
+                    {
+                        searchCardList.Add(pathes);
+                    }
+                }
+            }
+            else if (cbx_SearchCatego3.Text != "パック(すべて)")
+            {
+
+            }
+            else
+            {
+                string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
+                foreach (string pathes in filesFullPath)
                 {
                     searchCardList.Add(pathes);
                 }
-
             }
+            //string[] filesFullPath = Directory.GetFiles(@"Card List", "*.jpg", SearchOption.AllDirectories);
+
+            //foreach (string pathes in filesFullPath)
+            //{
+            //    if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+            //    {
+            //        if (pathes.Contains(tbx_Search.Text))
+            //        {
+            //            if ((pathes.Contains(cbx_SearchCatego1.Text)))
+            //            {
+            //                if ((pathes.Contains(cbx_SearchCatego2.Text)))
+            //                {
+            //                    searchCardList.Add(pathes);
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else if (cbx_SearchCatego1.Text != "カテゴリ(すべて)")
+            //    {
+            //        if (pathes.Contains(tbx_Search.Text))
+            //        {
+            //            if ((pathes.Contains(cbx_SearchCatego1.Text)))
+            //            {
+            //                searchCardList.Add(pathes);
+            //            }
+            //        }
+            //    }
+            //    else if (pathes.Contains(tbx_Search.Text))
+            //    {
+            //        searchCardList.Add(pathes);
+            //    }
+
+            //}
 
             SearchForm sf = new SearchForm();
             sf.ShowDialog();
@@ -263,6 +327,7 @@ namespace Pokeka
         private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbx_SearchCatego2.Text = "";
+            cbx_SearchCatego3.Text = "パック(すべて)";
             cbx_SearchCatego2.Items.Clear();
 
             if (cbx_SearchCatego1.Text == "ポケモン")
@@ -270,6 +335,13 @@ namespace Pokeka
                 cbx_SearchCatego2.Text = "すべて";
                 cbx_SearchCatego2.Items.AddRange(new object[]
                 {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "鋼", "悪", "龍", "妖"});
+            }
+            if (cbx_SearchCatego1.Text == "エネルギー")
+            {
+                cbx_SearchCatego3.Enabled = false;
+                cbx_SearchCatego2.Text = "すべて";
+                cbx_SearchCatego2.Items.AddRange(new object[]
+                {"すべて", "基本エネルギー", "特殊エネルギー"});
             }
         }
 
@@ -381,6 +453,11 @@ namespace Pokeka
             {
                 e.Handled = true;
             }
+        }
+
+        private void cbx_SearchCatego3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
