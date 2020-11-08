@@ -498,7 +498,6 @@
             this.Text = "SearchForm";
             this.Load += new System.EventHandler(this.SearchForm_Load);
             this.Shown += new System.EventHandler(this.SearchForm_Shown);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_02)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_03)).EndInit();
