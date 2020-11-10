@@ -296,25 +296,30 @@ namespace Pokeka
         private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbx_SearchCatego2.Text = "";
+            cbx_SearchCatego2.Enabled = true;
+            cbx_SearchCatego3.Enabled = true;
             cbx_SearchCatego3.Text = "パック(すべて)";
-            if (cbx_SearchCatego3.Enabled == false)
-            {
-                cbx_SearchCatego3.Enabled = true;
-            }
             cbx_SearchCatego2.Items.Clear();
 
             if (cbx_SearchCatego1.Text == "ポケモン")
             {
+                cbx_SearchCatego2.Enabled = true;
                 cbx_SearchCatego2.Text = "すべて";
                 cbx_SearchCatego2.Items.AddRange(new object[]
                 {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "悪", "鋼", "龍", "妖"});
             }
-            if (cbx_SearchCatego1.Text == "エネルギー")
+            else if (cbx_SearchCatego1.Text == "エネルギー")
             {
                 cbx_SearchCatego3.Enabled = false;
+                cbx_SearchCatego3.SelectedIndex = 0;
+                cbx_SearchCatego2.Enabled = false;
                 cbx_SearchCatego2.Text = "すべて";
                 cbx_SearchCatego2.Items.AddRange(new object[]
                 {"すべて", "基本エネルギー", "特殊エネルギー"});
+            }
+            else
+            {
+                cbx_SearchCatego2.Enabled = false;
             }
         }
 
