@@ -46,13 +46,11 @@ namespace Pokeka
             }
             else
             {
-                btn_Search.Focus();
                 return;
             }
 
             Nud_ValueChanged(cardInfo, ucCard);
             cardNum = num;
-            btn_Search.Focus();
         }
 
         private void Btn_Delete_Click(CardInfo cardInfo, uc_Card ucCard)
@@ -72,7 +70,6 @@ namespace Pokeka
             {
                 Nud_ValueChanged(cardInfo, ucCard);
             }
-            btn_Search.Focus();
         }
 
         private void Pbx_Pict_Click(int num)
@@ -89,15 +86,7 @@ namespace Pokeka
         internal void Nud_ValueChanged(CardInfo cardInfo, uc_Card ucCard)
         {
             cardInfo.Num = (int)ucCard.nud_Num.Value;
-            int allNum = 0;
-            for(int i=0; i< _cardInfo.Length; i++)
-            {
-                if(_cardInfo[i] != null)
-                {
-                    allNum += _cardInfo[i].Num;
-                }
-            }
-            tbx_Info_Num.Text = allNum.ToString();
+            AllNumChange();
         }
 
         internal void SetCardInfo(uc_Card ucCard, CardInfo cardInfo, int nums)
@@ -148,10 +137,21 @@ namespace Pokeka
                     }
                     tbx_Info_DeckName.Text = ofdDeck.SafeFileName.Replace(".csv", "");
                 }
-                //num = 1;
             }
+            AllNumChange();
+        }
 
-            btn_Search.Focus();
+        private void AllNumChange()
+        {
+            int allNum = 0;
+            for (int i = 0; i < _cardInfo.Length; i++)
+            {
+                if (_cardInfo[i] != null)
+                {
+                    allNum += _cardInfo[i].Num;
+                }
+            }
+            tbx_Info_Num.Text = allNum.ToString();
         }
 
         private void btn_Rec_Save_Click(object sender, EventArgs e)
@@ -159,14 +159,12 @@ namespace Pokeka
             if (tbx_Info_DeckName.Text == "")
             {
                 MessageBox.Show("デッキ名を入力してください。", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btn_Search.Focus();
                 return;
             }
 
             var result = MessageBox.Show("「" + tbx_Info_DeckName.Text + "」を保存しますか？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (result == DialogResult.No)
             {
-                btn_Search.Focus();
                 return;
             }
             
@@ -177,7 +175,6 @@ namespace Pokeka
                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.No)
                 {
-                    btn_Search.Focus();
                     return;
                 }
             }
@@ -193,7 +190,6 @@ namespace Pokeka
                     }
                 }
             }
-            btn_Search.Focus();
         }
 
         private void btn_Info_Show_Click(object sender, EventArgs e)
@@ -202,133 +198,18 @@ namespace Pokeka
             {
                 if (_cardInfo[i] == null)
                 {
-                    //btn_Search.Focus();
                     //return;
                 }
                 Btn_Delete_Click(_cardInfo[i], _ucCard[i]);
             }
             tbx_Info_DeckName.Text = "";
             tbx_Info_Num.Text = "";
-
-            btn_Search.Focus();
         }
 
-        public List<string> searchCardList = new List<string>();
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            SearchCard();
-        }
-
-        private void SearchCard()
-        {
-            searchCardList.Clear();
-            string directoryPath = @"Card List";
-
-            if (cbx_SearchCatego1.Text != "カテゴリ(すべて)")
-            {
-                if (cbx_SearchCatego3.Text != "パック(すべて)")
-                {
-                    if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
-                    {
-                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
-                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego3.Text;
-                        string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego2.Text;
-
-                        SearchCommon(directoryPath, directory2Path);
-                    }
-                    else
-                    {
-                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
-                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego3.Text;
-
-                        SearchCommon(directoryPath);
-                    }
-                }
-                else if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
-                {
-                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
-                    string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego2.Text;
-
-                    SearchCommon(directoryPath, directory2Path);
-                }
-                else
-                {
-                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego1.Text;
-                    
-                    SearchCommon(directoryPath);
-                }
-            }
-            else if (cbx_SearchCatego3.Text != "パック(すべて)")
-            {
-                string directory2Path = cbx_SearchCatego3.SelectedIndex.ToString("X2") + "_" + cbx_SearchCatego3.Text;
-
-                SearchCommon(directoryPath, directory2Path);
-            }
-            else
-            {
-                SearchCommon(directoryPath);
-            }
-
             SearchForm sf = new SearchForm();
-            sf.ShowDialog();
-        }
-        
-        private void SearchCommon(string directoryPath, string directory2Path = "")
-        {
-            string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
-            foreach (string pathes in filesFullPath)
-            {
-                if (pathes.Contains(directory2Path))
-                {
-                    if (tbx_Search.Text != "")
-                    {
-                        if (pathes.Contains(tbx_Search.Text))
-                            searchCardList.Add(pathes);
-                    }
-                    else
-                    {
-                        searchCardList.Add(pathes);
-                    }
-                }
-            }
-        }
-
-        private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cbx_SearchCatego2.Text = "";
-            cbx_SearchCatego2.Enabled = true;
-            cbx_SearchCatego3.Enabled = true;
-            cbx_SearchCatego3.Text = "パック(すべて)";
-            cbx_SearchCatego2.Items.Clear();
-
-            if (cbx_SearchCatego1.Text == "ポケモン")
-            {
-                cbx_SearchCatego2.Enabled = true;
-                cbx_SearchCatego2.Text = "すべて";
-                cbx_SearchCatego2.Items.AddRange(new object[]
-                {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "悪", "鋼", "龍", "妖"});
-            }
-            else if (cbx_SearchCatego1.Text == "エネルギー")
-            {
-                cbx_SearchCatego3.Enabled = false;
-                cbx_SearchCatego3.SelectedIndex = 0;
-                cbx_SearchCatego2.Enabled = false;
-                cbx_SearchCatego2.Text = "すべて";
-                cbx_SearchCatego2.Items.AddRange(new object[]
-                {"すべて", "基本エネルギー", "特殊エネルギー"});
-            }
-            else
-            {
-                cbx_SearchCatego2.Enabled = false;
-            }
-        }
-
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchCard();
-            }
+            sf.Show();
         }
 
         private void ClickBtnSelect(string sender)

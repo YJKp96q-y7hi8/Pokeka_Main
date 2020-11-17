@@ -13,121 +13,101 @@ namespace Pokeka
 {
     public partial class SearchForm : Form
     {
-        PictureBox[] pictureBoxes = new PictureBox[30];
-        int listNum = 0;
-
-        //FormMainオブジェクトを保持ずるためのフィールド
-        private static SearchForm _searchFormInstance;
-        //FormMainオブジェクトを取得・設定するためのプロパティ
-        public static SearchForm SearchFormInstance
-        {
-            get { return _searchFormInstance; }
-            set { _searchFormInstance = value; }
-        }
+        private List<string> searchCardList = new List<string>(); 
+        private List<PictureBox> manyPict = new List<PictureBox>();
+        private int pageNum = 0;
+        private int LIST_MAX = 50;
 
         public SearchForm()
         {
             InitializeComponent();
-            pictureBoxes[0] = pbx_01;
-            pictureBoxes[1] = pbx_02;
-            pictureBoxes[2] = pbx_03;
-            pictureBoxes[3] = pbx_04;
-            pictureBoxes[4] = pbx_05;
-            pictureBoxes[5] = pbx_06;
-            pictureBoxes[6] = pbx_07;
-            pictureBoxes[7] = pbx_08;
-            pictureBoxes[8] = pbx_09;
-            pictureBoxes[9] = pbx_10;
-            pictureBoxes[10] = pbx_11;
-            pictureBoxes[11] = pbx_12;
-            pictureBoxes[12] = pbx_13;
-            pictureBoxes[13] = pbx_14;
-            pictureBoxes[14] = pbx_15;
-            pictureBoxes[15] = pbx_16;
-            pictureBoxes[16] = pbx_17;
-            pictureBoxes[17] = pbx_18;
-            pictureBoxes[18] = pbx_19;
-            pictureBoxes[19] = pbx_20;
-            pictureBoxes[20] = pbx_21;
-            pictureBoxes[21] = pbx_22;
-            pictureBoxes[22] = pbx_23;
-            pictureBoxes[23] = pbx_24;
-            pictureBoxes[24] = pbx_25;
-            pictureBoxes[25] = pbx_26;
-            pictureBoxes[26] = pbx_27;
-            pictureBoxes[27] = pbx_28;
-            pictureBoxes[28] = pbx_29;
-            pictureBoxes[29] = pbx_30;
         }
 
         private void SearchForm_Load(object sender, EventArgs e)
         {
-            if(FormMain.Form1Instance.searchCardList.Count == 0)
+            string directoryPath = @"Card List";
+            SearchCommon(directoryPath);
+
+            if (searchCardList.Count == 0)
             {
                 return;
             }
 
-            if (FormMain.Form1Instance.searchCardList.Count > 30)
+            int h = Screen.GetWorkingArea(this).Height;
+            int w = Screen.GetWorkingArea(this).Width;
+
+            Console.WriteLine("h:{0}, w:{1}", h, w);
+
+            this.SetDesktopLocation(w - w / 4, 0);
+            this.Width = w / 4;
+            this.Height = h;
+
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+
+            int loopNum = searchCardList.Count;
+            if (loopNum > LIST_MAX)
             {
-                for (int i = 0; i < 30; i++)
-                {
-                    pictureBoxes[i].ImageLocation = FormMain.Form1Instance.searchCardList[i];
-                }
+                loopNum = LIST_MAX;
             }
-            else
+            for (int i = 0; i < loopNum; i++)
             {
-                for (int i = 0; i < FormMain.Form1Instance.searchCardList.Count; i++)
-                {
-                    pictureBoxes[i].ImageLocation = FormMain.Form1Instance.searchCardList[i];
-                }
+                PictureBox pict = new PictureBox();
+                manyPict.Add(pict);
+
+                int numX = i % 5;
+                int numY = i / 5 + 1;
+
+                tableLayoutPanel1.Controls.Add(manyPict[i], numX, numY);
+
+                manyPict[i].Dock = DockStyle.Fill;
+                manyPict[i].Name = "pict_" + i;
+                manyPict[i].SizeMode = PictureBoxSizeMode.Zoom;
+                manyPict[i].ImageLocation = searchCardList[i];
+
+                manyPict[i].Click += new EventHandler(pbx_Click);
             }
         }
 
         private void btn_Next_Click(object sender, EventArgs e)
         {
-            if (listNum + 30 > FormMain.Form1Instance.searchCardList.Count)
+            pageNum++;
+            int startNum = LIST_MAX * pageNum;
+            if (startNum > searchCardList.Count)
             {
+                pageNum--;
                 return;
             }
 
-            for (int i = 0; i < 30; i++)
-            {
-                pictureBoxes[i].ImageLocation = "";
-            }
-
-            listNum += 30;
-            if (FormMain.Form1Instance.searchCardList.Count > listNum + 30)
-            {
-                for (int i = listNum; i < listNum + 30; i++)
-                {
-                    pictureBoxes[i - listNum].ImageLocation = FormMain.Form1Instance.searchCardList[i];
-                }
-            }
-            else
-            {
-                for (int i = listNum; i < FormMain.Form1Instance.searchCardList.Count; i++)
-                {
-                    pictureBoxes[i - listNum].ImageLocation = FormMain.Form1Instance.searchCardList[i];
-                }
-            }
+            PageChange(startNum);
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            if (listNum - 30 < 0)
+            if (pageNum == 0) { return; }
+
+            pageNum--;
+            int startNum = LIST_MAX * pageNum;
+
+            PageChange(startNum);
+        }
+
+        private void PageChange(int startNum)
+        {
+            for (int i = 0; i < LIST_MAX; i++)
             {
-                return;
+                manyPict[i].ImageLocation = "";
             }
 
-            for (int i = 0; i < 30; i++)
+            int loopNum = searchCardList.Count - startNum;
+            if (loopNum > LIST_MAX)
             {
-                pictureBoxes[i].ImageLocation = "";
+                loopNum = LIST_MAX;
             }
 
-            listNum -= 30;
-            for (int i = listNum; i < listNum + 30; i++)
+            for (int i = 0; i < loopNum; i++)
             {
-                pictureBoxes[i - listNum].ImageLocation = FormMain.Form1Instance.searchCardList[i];
+                manyPict[i].ImageLocation = searchCardList[startNum + i];
             }
         }
 
@@ -165,7 +145,117 @@ namespace Pokeka
             {
                 MessageBox.Show("謎エラー");
             }
-            this.Close();
+        }
+
+        /// <summary>
+        /// 検索アルゴリズム
+        /// </summary>
+        private void SearchCard()
+        {
+            searchCardList.Clear();
+            string directoryPath = @"Card List";
+
+            if (cbx_SearchCatego1.Text != "カテゴリ")
+            {
+                if (cbx_SearchCatego3.Text != "パック")
+                {
+                    if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                    {
+                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego1.Text;
+                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego3.Text;
+                        string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego2.Text;
+
+                        SearchCommon(directoryPath, directory2Path);
+                    }
+                    else
+                    {
+                        directoryPath += @"\" + cbx_SearchCatego1.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego1.Text;
+                        directoryPath += "\\" + cbx_SearchCatego3.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego3.Text;
+
+                        SearchCommon(directoryPath);
+                    }
+                }
+                else if (cbx_SearchCatego2.Text != "すべて" && cbx_SearchCatego2.Text != "")
+                {
+                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego1.Text;
+                    string directory2Path = cbx_SearchCatego2.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego2.Text;
+
+                    SearchCommon(directoryPath, directory2Path);
+                }
+                else
+                {
+                    directoryPath += @"\\" + cbx_SearchCatego1.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego1.Text;
+
+                    SearchCommon(directoryPath);
+                }
+            }
+            else if (cbx_SearchCatego3.Text != "パック")
+            {
+                string directory2Path = cbx_SearchCatego3.SelectedIndex.ToString("D2") + "_" + cbx_SearchCatego3.Text;
+
+                SearchCommon(directoryPath, directory2Path);
+            }
+            else
+            {
+                SearchCommon(directoryPath);
+            }
+
+            PageChange(0);
+        }
+
+        /// <summary>
+        /// 検索アルゴリズム共通部分
+        /// </summary>
+        /// <param name="directoryPath">ディレクトリパス1</param>
+        /// <param name="directory2Path">ディレクトリパス2</param>
+        private void SearchCommon(string directoryPath, string directory2Path = "")
+        {
+            string[] filesFullPath = Directory.GetFiles(directoryPath, "*.jpg", SearchOption.AllDirectories);
+            foreach (string pathes in filesFullPath)
+            {
+                if (pathes.Contains(directory2Path))
+                {
+                    if (tbx_Search.Text != "")
+                    {
+                        if (pathes.Contains(tbx_Search.Text))
+                            searchCardList.Add(pathes);
+                    }
+                    else
+                    {
+                        searchCardList.Add(pathes);
+                    }
+                }
+            }
+        }
+
+        private void cbx_SearchCatego_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_SearchCatego2.Text = "";
+            cbx_SearchCatego2.Enabled = true;
+            cbx_SearchCatego3.Enabled = true;
+            cbx_SearchCatego3.Text = "パック";
+            cbx_SearchCatego2.Items.Clear();
+
+            if (cbx_SearchCatego1.Text == "ポケモン")
+            {
+                cbx_SearchCatego2.Enabled = true;
+                cbx_SearchCatego2.Text = "すべて";
+                cbx_SearchCatego2.Items.AddRange(new object[]
+                {"すべて", "無", "草", "炎", "水", "雷", "超", "闘", "悪", "鋼", "龍", "妖"});
+            }
+            else if (cbx_SearchCatego1.Text == "エネルギー")
+            {
+                cbx_SearchCatego3.Enabled = false;
+                cbx_SearchCatego3.SelectedIndex = 0;
+                cbx_SearchCatego2.Enabled = false;
+                cbx_SearchCatego2.Text = "すべて";
+                cbx_SearchCatego2.Items.AddRange(new object[]
+                {"すべて", "基本エネルギー", "特殊エネルギー"});
+            }
+            else
+            {
+                cbx_SearchCatego2.Enabled = false;
+            }
         }
 
         private void pbx_Click(object sender, EventArgs e)
@@ -178,9 +268,10 @@ namespace Pokeka
             this.Close();
         }
 
-        private void SearchForm_Shown(object sender, EventArgs e)
+        private void SearchCard(object sender, EventArgs e)
         {
-            pbx_01.Focus();
+            pageNum = 0;
+            SearchCard();
         }
     }
 }
