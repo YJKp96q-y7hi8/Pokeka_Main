@@ -32,8 +32,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.pbx_Pict = new System.Windows.Forms.PictureBox();
-            this.btn_Select = new System.Windows.Forms.Button();
             this.nud_Num = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.gbx_Card.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Pict)).BeginInit();
@@ -53,13 +53,13 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.Controls.Add(this.btn_Delete, 2, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.50485F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.74757F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.74757F));
             this.tableLayoutPanel1.Controls.Add(this.pbx_Pict, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Select, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.nud_Num, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.nud_Num, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Delete, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -72,9 +72,9 @@
             // btn_Delete
             // 
             this.btn_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Delete.Location = new System.Drawing.Point(122, 227);
+            this.btn_Delete.Location = new System.Drawing.Point(33, 227);
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(60, 28);
+            this.btn_Delete.Size = new System.Drawing.Size(71, 28);
             this.btn_Delete.TabIndex = 2;
             this.btn_Delete.Text = "削除";
             this.btn_Delete.UseVisualStyleBackColor = true;
@@ -93,22 +93,11 @@
             this.pbx_Pict.WaitOnLoad = true;
             this.pbx_Pict.Click += new System.EventHandler(this.pbx_Pict_Click);
             // 
-            // btn_Select
-            // 
-            this.btn_Select.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Select.Location = new System.Drawing.Point(58, 227);
-            this.btn_Select.Name = "btn_Select";
-            this.btn_Select.Size = new System.Drawing.Size(58, 28);
-            this.btn_Select.TabIndex = 1;
-            this.btn_Select.Text = "選択";
-            this.btn_Select.UseVisualStyleBackColor = true;
-            this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
-            // 
             // nud_Num
             // 
             this.nud_Num.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.nud_Num.Enabled = false;
-            this.nud_Num.Location = new System.Drawing.Point(2, 230);
+            this.nud_Num.Location = new System.Drawing.Point(109, 230);
             this.nud_Num.Margin = new System.Windows.Forms.Padding(2);
             this.nud_Num.Maximum = new decimal(new int[] {
             60,
@@ -121,7 +110,7 @@
             0,
             0});
             this.nud_Num.Name = "nud_Num";
-            this.nud_Num.Size = new System.Drawing.Size(51, 22);
+            this.nud_Num.Size = new System.Drawing.Size(74, 22);
             this.nud_Num.TabIndex = 0;
             this.nud_Num.Value = new decimal(new int[] {
             1,
@@ -129,6 +118,16 @@
             0,
             0});
             this.nud_Num.ValueChanged += new System.EventHandler(this.nud_Num_ValueChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 232);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(24, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // uc_Card
             // 
@@ -140,6 +139,7 @@
             this.Size = new System.Drawing.Size(191, 282);
             this.gbx_Card.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Pict)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Num)).EndInit();
             this.ResumeLayout(false);
@@ -151,8 +151,8 @@
         public System.Windows.Forms.GroupBox gbx_Card;
         public System.Windows.Forms.PictureBox pbx_Pict;
         public System.Windows.Forms.Button btn_Delete;
-        public System.Windows.Forms.Button btn_Select;
         public System.Windows.Forms.NumericUpDown nud_Num;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

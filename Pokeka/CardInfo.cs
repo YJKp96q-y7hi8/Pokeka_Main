@@ -17,11 +17,6 @@ namespace Pokeka
             ENERGY,
         }
 
-        //public string name = ""; //カード名
-        //public string category = ""; //カテゴリー
-        //public string pictPass = ""; //画像パス
-        //public int num = 0;  //枚数
-
         public string Name { set; get; } //カード名
         public string Category { set; get; } //カテゴリー
         public string PictPass { set; get; } //画像パス

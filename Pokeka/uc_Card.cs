@@ -13,6 +13,15 @@ namespace Pokeka
 {
     public partial class uc_Card : UserControl
     {
+        private enum CATEGORY
+        {
+            POKEMON,
+            GOODS,
+            SUPPORT,
+            STUDIUM,
+            ENERGY,
+        }
+
         OpenFileDialog ofd = new OpenFileDialog();
 
         public event EventHandler Click_Btn_Select;
@@ -24,6 +33,34 @@ namespace Pokeka
         {
             InitializeComponent();
             ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"Card List");
+        }
+
+        public string CardName { set; get; } //カード名
+        public string Category { set; get; } //カテゴリー
+        public string PictPass { set; get; } //画像パス
+        public int Num { set; get; }  //枚数
+
+        public void SetCardInfo(string fileName, string pass)
+        {
+            Name = fileName.Replace(".jpg", "");
+            PictPass = pass;
+            Num = 1;
+
+            string[] cstegoArray = { "ポケモン", "グッズ", "サポート", "スタジアム", "エネルギー" };
+
+            if (pass.Replace(fileName, "").Contains("ポケモン")) { Category = cstegoArray[(int)CATEGORY.POKEMON]; }
+            if (pass.Replace(fileName, "").Contains("グッズ")) { Category = cstegoArray[(int)CATEGORY.GOODS]; }
+            if (pass.Replace(fileName, "").Contains("サポート")) { Category = cstegoArray[(int)CATEGORY.SUPPORT]; }
+            if (pass.Replace(fileName, "").Contains("スタジアム")) { Category = cstegoArray[(int)CATEGORY.STUDIUM]; }
+            if (pass.Replace(fileName, "").Contains("エネルギー")) { Category = cstegoArray[(int)CATEGORY.ENERGY]; }
+        }
+
+        public void DeleteCardInfo()
+        {
+            CardName = "";
+            Category = "";
+            PictPass = "";
+            Num = 0;
         }
 
         protected virtual void OnEvent(EventHandler handle, EventArgs e)
