@@ -120,26 +120,26 @@ namespace Pokeka
 
             try
             {
-                CardInfo newCardInfo = null;
-                uc_Card newUcCard = null;
-                for(int i = 1; i<31; i++)
+                int num = 40;
+
+                for(int i = 0; i< num; i++)
                 {
-                    if(FormMain.Form1Instance._cardInfo[i] == null)
+                    if(FormMain.Form1Instance.uc_DeckCard[i].Pict.ImageLocation == null)
                     {
-                        FormMain.Form1Instance._cardInfo[i] = new CardInfo();
-                        newCardInfo = FormMain.Form1Instance._cardInfo[i];
-                        newUcCard = FormMain.Form1Instance._ucCard[i];
+                        num = i;
                         break;
                     }
                 }
-                if(newCardInfo == null || newUcCard == null)
+                if(num == 40)
                 {
                     MessageBox.Show("追加できません");
                     return;
                 }
-                newCardInfo.SetCardInfo(Path.GetFileName(sender.ImageLocation), sender.ImageLocation);
-                FormMain.Form1Instance.SetCardInfo(newUcCard, newCardInfo, 1);
-                FormMain.Form1Instance.Nud_ValueChanged(newCardInfo, newUcCard);
+
+                FormMain.Form1Instance.uc_DeckCard[num].SetCardInfo(Path.GetFileName(sender.ImageLocation), sender.ImageLocation);
+                FormMain.Form1Instance.SetColor(num);
+                FormMain.Form1Instance.uc_DeckCard[num].Nud.Enabled = true;
+                FormMain.Form1Instance.uc_DeckCard[num].Nud.Value = 1;
             }
             catch
             {

@@ -13,21 +13,12 @@ namespace Pokeka
 {
     public partial class uc_Card : UserControl
     {
-        private enum CATEGORY
-        {
-            POKEMON,
-            GOODS,
-            SUPPORT,
-            STUDIUM,
-            ENERGY,
-        }
-
         OpenFileDialog ofd = new OpenFileDialog();
 
-        public event EventHandler Click_Btn_Select;
         public event EventHandler Click_Btn_Delete;
         public event EventHandler Click_Pbx_Pict;
         public event EventHandler ValueChanged_Nud_Num;
+        public event EventHandler CheckedChanged_Chbx_Check;
 
         public uc_Card()
         {
@@ -35,32 +26,43 @@ namespace Pokeka
             ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"Card List");
         }
 
-        public string CardName { set; get; } //カード名
-        public string Category { set; get; } //カテゴリー
-        public string PictPass { set; get; } //画像パス
-        public int Num { set; get; }  //枚数
+        public PictureBox Pict
+        {
+            get { return pbx_Pict; }
+        }
+
+        public string GbxText
+        {
+            get { return gbx_Card.Text; }
+            set { gbx_Card.Text = value; }
+        }
+
+        public bool ChbxChecked
+        {
+            get { return chbx_Check.Checked; }
+            set { chbx_Check.Checked = value; }
+        }
+
+        public NumericUpDown Nud
+        {
+            get { return nud_Num; }
+        }
+
+        //枚数変更前の枚数を保存するための変数
+        public int Num;
 
         public void SetCardInfo(string fileName, string pass)
         {
-            Name = fileName.Replace(".jpg", "");
-            PictPass = pass;
-            Num = 1;
+            string category = "";
 
-            string[] cstegoArray = { "ポケモン", "グッズ", "サポート", "スタジアム", "エネルギー" };
+            if (pass.Replace(fileName, "").Contains("ポケモン")) { category = "ポケモン"; }
+            if (pass.Replace(fileName, "").Contains("グッズ")) { category = "グッズ"; }
+            if (pass.Replace(fileName, "").Contains("サポート")) { category = "サポート"; }
+            if (pass.Replace(fileName, "").Contains("スタジアム")) { category = "スタジアム"; }
+            if (pass.Replace(fileName, "").Contains("エネルギー")) { category = "エネルギー"; }
 
-            if (pass.Replace(fileName, "").Contains("ポケモン")) { Category = cstegoArray[(int)CATEGORY.POKEMON]; }
-            if (pass.Replace(fileName, "").Contains("グッズ")) { Category = cstegoArray[(int)CATEGORY.GOODS]; }
-            if (pass.Replace(fileName, "").Contains("サポート")) { Category = cstegoArray[(int)CATEGORY.SUPPORT]; }
-            if (pass.Replace(fileName, "").Contains("スタジアム")) { Category = cstegoArray[(int)CATEGORY.STUDIUM]; }
-            if (pass.Replace(fileName, "").Contains("エネルギー")) { Category = cstegoArray[(int)CATEGORY.ENERGY]; }
-        }
-
-        public void DeleteCardInfo()
-        {
-            CardName = "";
-            Category = "";
-            PictPass = "";
-            Num = 0;
+            gbx_Card.Text = category;
+            pbx_Pict.ImageLocation = pass;
         }
 
         protected virtual void OnEvent(EventHandler handle, EventArgs e)
@@ -70,11 +72,6 @@ namespace Pokeka
             {
                 handler(this, e);
             }
-        }
-
-        private void btn_Select_Click(object sender, EventArgs e)
-        {
-            OnEvent(Click_Btn_Select, e);
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -87,6 +84,11 @@ namespace Pokeka
             OnEvent(Click_Pbx_Pict, e);
         }
 
+        private void chbx_Check_CheckedChanged(object sender, EventArgs e)
+        {
+            OnEvent(CheckedChanged_Chbx_Check, e);
+        }
+
         private void nud_Num_ValueChanged(object sender, EventArgs e)
         {
             OnEvent(ValueChanged_Nud_Num, e);
@@ -96,6 +98,20 @@ namespace Pokeka
                 {
                     nud_Num.Value = 4;
                 }
+            }
+        }
+
+        private void gbx_Card_TextChanged(object sender, EventArgs e)
+        {
+            if(pbx_Pict.ImageLocation != null)
+            {
+                nud_Num.Value = 1;
+                nud_Num.Enabled = true;
+            }
+            else
+            {
+                nud_Num.Value = 0;
+                nud_Num.Enabled = false;
             }
         }
     }

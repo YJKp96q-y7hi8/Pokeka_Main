@@ -17,7 +17,7 @@ namespace Pokeka
             InitializeComponent();
 
             FormMain formMain = FormMain.Form1Instance;
-            pbx_Image.ImageLocation = formMain._cardInfo[formMain.cardNum].PictPass;
+            pbx_Image.ImageLocation = formMain.selectCardPath;
         }
 
         private void pbx_Image_Click(object sender, EventArgs e)

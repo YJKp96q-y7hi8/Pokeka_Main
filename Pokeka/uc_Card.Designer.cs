@@ -30,10 +30,10 @@
         {
             this.gbx_Card = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Delete = new System.Windows.Forms.Button();
             this.pbx_Pict = new System.Windows.Forms.PictureBox();
             this.nud_Num = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btn_Delete = new System.Windows.Forms.Button();
+            this.chbx_Check = new System.Windows.Forms.CheckBox();
             this.gbx_Card.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Pict)).BeginInit();
@@ -49,6 +49,7 @@
             this.gbx_Card.Size = new System.Drawing.Size(191, 282);
             this.gbx_Card.TabIndex = 1;
             this.gbx_Card.TabStop = false;
+            this.gbx_Card.TextChanged += new System.EventHandler(this.gbx_Card_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -59,7 +60,7 @@
             this.tableLayoutPanel1.Controls.Add(this.pbx_Pict, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.nud_Num, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_Delete, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.chbx_Check, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -68,17 +69,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(185, 261);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Delete.Location = new System.Drawing.Point(33, 227);
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(71, 28);
-            this.btn_Delete.TabIndex = 2;
-            this.btn_Delete.Text = "削除";
-            this.btn_Delete.UseVisualStyleBackColor = true;
-            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // pbx_Pict
             // 
@@ -90,7 +80,6 @@
             this.pbx_Pict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbx_Pict.TabIndex = 3;
             this.pbx_Pict.TabStop = false;
-            this.pbx_Pict.WaitOnLoad = true;
             this.pbx_Pict.Click += new System.EventHandler(this.pbx_Pict_Click);
             // 
             // nud_Num
@@ -104,30 +93,32 @@
             0,
             0,
             0});
-            this.nud_Num.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nud_Num.Name = "nud_Num";
             this.nud_Num.Size = new System.Drawing.Size(74, 22);
             this.nud_Num.TabIndex = 0;
-            this.nud_Num.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nud_Num.ValueChanged += new System.EventHandler(this.nud_Num_ValueChanged);
             // 
-            // checkBox1
+            // btn_Delete
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 232);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(24, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.btn_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Delete.Location = new System.Drawing.Point(33, 227);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(71, 28);
+            this.btn_Delete.TabIndex = 2;
+            this.btn_Delete.Text = "削除";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // chbx_Check
+            // 
+            this.chbx_Check.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbx_Check.AutoSize = true;
+            this.chbx_Check.Location = new System.Drawing.Point(3, 232);
+            this.chbx_Check.Name = "chbx_Check";
+            this.chbx_Check.Size = new System.Drawing.Size(24, 17);
+            this.chbx_Check.TabIndex = 4;
+            this.chbx_Check.UseVisualStyleBackColor = true;
+            this.chbx_Check.CheckedChanged += new System.EventHandler(this.chbx_Check_CheckedChanged);
             // 
             // uc_Card
             // 
@@ -153,6 +144,6 @@
         public System.Windows.Forms.Button btn_Delete;
         public System.Windows.Forms.NumericUpDown nud_Num;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chbx_Check;
     }
 }
